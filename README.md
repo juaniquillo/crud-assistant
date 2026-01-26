@@ -4,6 +4,12 @@ Crud Assistant is a set of utilities that helps with crud management and compone
 
 There is one main goal Crud Assistant is set to solve: **Organization**.
 
+> [!NOTE]
+> 
+> #### About this fork.
+> 
+> This repository is a fork of [ChatAgency/crud-assistant](https://github.com/ChatAgency/crud-assistant). I worked on this repository while I was working with that company and decided to fork it and take ownership of it.
+
 **The Problem**: You create a landing page with a simple form using, for example, Laravel. Once approved you move it to the production server. After that, the client calls with more changes: You have to add an additional form fields or make changes to the existing ones. That involves changes to the html form, validation, migration, model, etc. 
 
 This is where this package shines. It allows the you to, depending on your implementation, make changes only in a couple of places. With Crud Assistant you can consolidate all business logic in `Inputs` and all implementation code in `Actions`. This also promotes code isolation and code re-use.
