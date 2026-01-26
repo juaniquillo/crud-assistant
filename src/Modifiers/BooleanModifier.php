@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Modifiers;
+namespace Juaniquillo\CrudAssistant\Modifiers;
 
-use Chatagency\CrudAssistant\Contracts\ModifierInterface;
+use Juaniquillo\CrudAssistant\Contracts\ModifierInterface;
 
 class BooleanModifier implements ModifierInterface
 {

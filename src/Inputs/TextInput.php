@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Inputs;
+namespace Juaniquillo\CrudAssistant\Inputs;
 
-use Chatagency\CrudAssistant\Contracts\InputInterface;
-use Chatagency\CrudAssistant\Input;
+use Juaniquillo\CrudAssistant\Contracts\InputInterface;
+use Juaniquillo\CrudAssistant\Input;
 
 /**
  * Text input class.

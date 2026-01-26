@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Concerns;
+namespace Juaniquillo\CrudAssistant\Concerns;
 
-use Chatagency\CrudAssistant\Contracts\DataContainerInterface;
-use Chatagency\CrudAssistant\Contracts\InputInterface;
-use Chatagency\CrudAssistant\Contracts\ModifierInterface;
-use Chatagency\CrudAssistant\DataContainer;
+use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputInterface;
+use Juaniquillo\CrudAssistant\Contracts\ModifierInterface;
+use Juaniquillo\CrudAssistant\DataContainer;
 
 trait IsAction
 {

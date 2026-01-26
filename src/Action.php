@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant;
+namespace Juaniquillo\CrudAssistant;
 
-use Chatagency\CrudAssistant\Concerns\IsAction;
+use Juaniquillo\CrudAssistant\Concerns\IsAction;
 
 /**
  * Action base class.

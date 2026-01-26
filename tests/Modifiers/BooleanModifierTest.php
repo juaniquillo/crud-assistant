@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Tests\Modifiers;
+namespace Juaniquillo\CrudAssistant\Tests\Modifiers;
 
-use Chatagency\CrudAssistant\DataContainer;
-use Chatagency\CrudAssistant\Modifiers\BooleanModifier;
+use Juaniquillo\CrudAssistant\DataContainer;
+use Juaniquillo\CrudAssistant\Modifiers\BooleanModifier;
 use PHPUnit\Framework\TestCase;
 
 class BooleanModifierTest extends TestCase
