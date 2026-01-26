@@ -92,7 +92,7 @@ class FilterActionTest extends TestCase
 
         $email = new TextInput('email', 'Email');
 
-        $recipe = new FilterRecipe(true, false, function ($input, $data) {
+        $recipe = new FilterRecipe(true, false, static function ($input, $data) {
             unset($data[$input->getName()]);
 
             return $data;

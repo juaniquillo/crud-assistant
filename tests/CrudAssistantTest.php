@@ -40,7 +40,7 @@ class CrudAssistantTest extends TestCase
 
     public function testTheIsClosureHelperChecksIfParameterIsAClosure()
     {
-        $this->assertTrue(CrudAssistant::isClosure(function () {}));
+        $this->assertTrue(CrudAssistant::isClosure(static function () {}));
 
         $this->assertFalse(CrudAssistant::isClosure('array_map'));
     }
