@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Tests;
+namespace Juaniquillo\CrudAssistant\Tests;
 
-use Chatagency\CrudAssistant\Contracts\InputCollectionInterface;
-use Chatagency\CrudAssistant\CrudAssistant;
-use Chatagency\CrudAssistant\InputCollection;
-use Chatagency\CrudAssistant\Inputs\TextInput;
+use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
+use Juaniquillo\CrudAssistant\CrudAssistant;
+use Juaniquillo\CrudAssistant\InputCollection;
+use Juaniquillo\CrudAssistant\Inputs\TextInput;
 use PHPUnit\Framework\TestCase;
 
 class CrudAssistantTest extends TestCase

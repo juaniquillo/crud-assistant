@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Concerns;
+namespace Juaniquillo\CrudAssistant\Concerns;
 
 trait IsDataContainer
 {

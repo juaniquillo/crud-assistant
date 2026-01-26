@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant;
+namespace Juaniquillo\CrudAssistant;
 
-use Chatagency\CrudAssistant\Contracts\InputCollectionInterface;
-use Chatagency\CrudAssistant\Contracts\InputInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputInterface;
 
 /**
  * Crud Assistant Manager.

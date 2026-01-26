@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant;
+namespace Juaniquillo\CrudAssistant;
 
-use Chatagency\CrudAssistant\Contracts\ActionInterface;
-use Chatagency\CrudAssistant\Contracts\DataContainerInterface;
-use Chatagency\CrudAssistant\Contracts\InputCollectionInterface;
-use Chatagency\CrudAssistant\Contracts\InputInterface;
-use Chatagency\CrudAssistant\Contracts\RecipeInterface;
+use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
+use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputInterface;
+use Juaniquillo\CrudAssistant\Contracts\RecipeInterface;
 
 /**
  * Input Base Class.

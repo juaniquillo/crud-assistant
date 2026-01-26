@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant;
+namespace Juaniquillo\CrudAssistant;
 
-use Chatagency\CrudAssistant\Concerns\IsDataContainer;
-use Chatagency\CrudAssistant\Contracts\DataContainerInterface;
+use Juaniquillo\CrudAssistant\Concerns\IsDataContainer;
+use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
 
 /**
  * DataContainer.

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Tests;
+namespace Juaniquillo\CrudAssistant\Tests;
 
-use Chatagency\CrudAssistant\Actions\LabelValueAction;
-use Chatagency\CrudAssistant\Contracts\InputCollectionInterface;
-use Chatagency\CrudAssistant\Contracts\InputInterface;
-use Chatagency\CrudAssistant\InputCollection;
-use Chatagency\CrudAssistant\Inputs\OptionInput;
-use Chatagency\CrudAssistant\Inputs\SelectInput;
-use Chatagency\CrudAssistant\Inputs\TextInput;
-use Chatagency\CrudAssistant\Recipes\LabelValueRecipe;
+use Juaniquillo\CrudAssistant\Actions\LabelValueAction;
+use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputInterface;
+use Juaniquillo\CrudAssistant\InputCollection;
+use Juaniquillo\CrudAssistant\Inputs\OptionInput;
+use Juaniquillo\CrudAssistant\Inputs\SelectInput;
+use Juaniquillo\CrudAssistant\Inputs\TextInput;
+use Juaniquillo\CrudAssistant\Recipes\LabelValueRecipe;
 use PHPUnit\Framework\TestCase;
 
 class InputTest extends TestCase

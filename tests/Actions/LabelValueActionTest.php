@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Tests\Actions;
+namespace Juaniquillo\CrudAssistant\Tests\Actions;
 
-use Chatagency\CrudAssistant\Actions\LabelValueAction;
-use Chatagency\CrudAssistant\CrudAssistant;
-use Chatagency\CrudAssistant\DataContainer;
-use Chatagency\CrudAssistant\Input;
-use Chatagency\CrudAssistant\InputCollection;
-use Chatagency\CrudAssistant\Inputs\TextInput;
-use Chatagency\CrudAssistant\Modifiers\BooleanModifier;
-use Chatagency\CrudAssistant\Recipes\LabelValueRecipe;
+use Juaniquillo\CrudAssistant\Actions\LabelValueAction;
+use Juaniquillo\CrudAssistant\CrudAssistant;
+use Juaniquillo\CrudAssistant\DataContainer;
+use Juaniquillo\CrudAssistant\Input;
+use Juaniquillo\CrudAssistant\InputCollection;
+use Juaniquillo\CrudAssistant\Inputs\TextInput;
+use Juaniquillo\CrudAssistant\Modifiers\BooleanModifier;
+use Juaniquillo\CrudAssistant\Recipes\LabelValueRecipe;
 use PHPUnit\Framework\TestCase;
 
 class LabelValueActionTest extends TestCase
