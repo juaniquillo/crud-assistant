@@ -35,6 +35,14 @@ interface InputInterface
 
     public function unsetAttribute(string $key): static;
 
+    /** @param array<string> $actions */
+    public function onlyFor(array $actions): static;
+
+    /** @return array<string> */
+    public function getOnlyFor(): array;
+
+    public function isFor(string $action): bool;
+
     public function getSubElements(): ?InputCollectionInterface;
 
     public function setRecipe(RecipeInterface $recipe): static;
