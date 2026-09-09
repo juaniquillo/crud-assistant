@@ -29,6 +29,8 @@ abstract class Input implements InputInterface
 
     protected array $recipes = [];
 
+    protected array $onlyFor = [];
+
     public function __construct(?string $name = null, ?string $label = null)
     {
         $this->name = $name;
@@ -118,6 +120,27 @@ abstract class Input implements InputInterface
         }
 
         return $this;
+    }
+
+    public function onlyFor(array $actions): static
+    {
+        $this->onlyFor = $actions;
+
+        return $this;
+    }
+
+    public function getOnlyFor(): array
+    {
+        return $this->onlyFor;
+    }
+
+    public function isFor(string $action): bool
+    {
+        if (empty($this->getOnlyFor())) {
+            return true;
+        }
+
+        return \in_array($action, $this->onlyFor);
     }
 
     public function getSubElements(): ?InputCollectionInterface
