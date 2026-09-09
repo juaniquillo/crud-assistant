@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Recipes;
+namespace Juaniquillo\CrudAssistant\Recipes;
 
-use Chatagency\CrudAssistant\Actions\LabelValueAction;
-use Chatagency\CrudAssistant\Concerns\IsRecipe;
-use Chatagency\CrudAssistant\Contracts\RecipeInterface;
+use Juaniquillo\CrudAssistant\Actions\LabelValueAction;
+use Juaniquillo\CrudAssistant\Concerns\IsRecipe;
+use Juaniquillo\CrudAssistant\Contracts\RecipeInterface;
 
 /**
  * Label Value Action Recipe.

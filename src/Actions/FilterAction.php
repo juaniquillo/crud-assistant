@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Actions;
+namespace Juaniquillo\CrudAssistant\Actions;
 
-use Chatagency\CrudAssistant\Action;
-use Chatagency\CrudAssistant\Containers\FilterContainer;
-use Chatagency\CrudAssistant\Contracts\ActionInterface;
-use Chatagency\CrudAssistant\Contracts\InputCollectionInterface;
-use Chatagency\CrudAssistant\Contracts\InputInterface;
-use Chatagency\CrudAssistant\CrudAssistant;
+use Juaniquillo\CrudAssistant\Action;
+use Juaniquillo\CrudAssistant\Containers\FilterContainer;
+use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputInterface;
+use Juaniquillo\CrudAssistant\CrudAssistant;
 
 /**
  * Filter action.

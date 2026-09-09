@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Tests\Actions;
+namespace Juaniquillo\CrudAssistant\Tests\Actions;
 
-use Chatagency\CrudAssistant\Actions\LabelValueAction;
-use Chatagency\CrudAssistant\CrudAssistant;
-use Chatagency\CrudAssistant\DataContainer;
-use Chatagency\CrudAssistant\Input;
-use Chatagency\CrudAssistant\InputCollection;
-use Chatagency\CrudAssistant\Inputs\TextInput;
-use Chatagency\CrudAssistant\Modifiers\BooleanModifier;
-use Chatagency\CrudAssistant\Recipes\LabelValueRecipe;
+use Juaniquillo\CrudAssistant\Actions\LabelValueAction;
+use Juaniquillo\CrudAssistant\CrudAssistant;
+use Juaniquillo\CrudAssistant\DataContainer;
+use Juaniquillo\CrudAssistant\Input;
+use Juaniquillo\CrudAssistant\InputCollection;
+use Juaniquillo\CrudAssistant\Inputs\TextInput;
+use Juaniquillo\CrudAssistant\Modifiers\BooleanModifier;
+use Juaniquillo\CrudAssistant\Recipes\LabelValueRecipe;
 use PHPUnit\Framework\TestCase;
 
 class LabelValueActionTest extends TestCase
@@ -92,7 +92,7 @@ class LabelValueActionTest extends TestCase
 
         $nameFormat = 'The %s is';
 
-        $nameRecipe = new LabelValueRecipe(function (Input $input, DataContainer $params) use ($nameFormat) {
+        $nameRecipe = new LabelValueRecipe(static function (Input $input, DataContainer $params) use ($nameFormat) {
             return \sprintf($nameFormat, $input->getLabel());
         });
 
@@ -100,7 +100,7 @@ class LabelValueActionTest extends TestCase
 
         $emailFormat = 'The address is %s';
 
-        $emailRecipe = new LabelValueRecipe(null, function (Input $input, $model) use ($emailFormat) {
+        $emailRecipe = new LabelValueRecipe(null, static function (Input $input, $model) use ($emailFormat) {
             return \sprintf($emailFormat, $model->email);
         });
 

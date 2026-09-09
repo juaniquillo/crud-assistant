@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant;
+namespace Juaniquillo\CrudAssistant;
 
-use Chatagency\CrudAssistant\Concerns\IsRecipe;
-use Chatagency\CrudAssistant\Contracts\RecipeInterface;
+use Juaniquillo\CrudAssistant\Concerns\IsRecipe;
+use Juaniquillo\CrudAssistant\Contracts\RecipeInterface;
 
 /**
  * the recipe class stores input

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Concerns;
+namespace Juaniquillo\CrudAssistant\Concerns;
 
-use Chatagency\CrudAssistant\Contracts\ModifierInterface;
+use Juaniquillo\CrudAssistant\Contracts\ModifierInterface;
 
 /**
  * Recipe Trait.

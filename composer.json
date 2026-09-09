@@ -1,17 +1,17 @@
 {
-    "name": "chatagency/crud-assistant",
+    "name": "juaniquillo/crud-assistant",
     "description": "Crud Assistant",
     "keywords": [
-        "chatagency",
+        "juaniquillo",
         "crud-assistant"
     ],
-    "homepage": "https://github.com/chatagency/crud-assistant",
+    "homepage": "https://github.com/juaniquillo/crud-assistant",
     "license": "MIT",
     "type": "library",
     "authors": [
         {
-            "name": "Victor Sánchez",
-            "email": "victor@chatagency.com",
+            "name": "Victor Sánchez (Juaniquillo",
+            "email": "juaniquillo@gmail.com",
             "role": "Developer"
         }
     ],
@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Chatagency\\CrudAssistant\\": "src"
+            "Juaniquillo\\CrudAssistant\\": "src"
         },
         "files": [
           "helpers/helpers.php"
@@ -33,7 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Chatagency\\CrudAssistant\\Tests\\": "tests"
+            "Juaniquillo\\CrudAssistant\\Tests\\": "tests"
         }
     },
     "scripts": {

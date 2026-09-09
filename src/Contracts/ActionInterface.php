@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Contracts;
+namespace Juaniquillo\CrudAssistant\Contracts;
 
-use Chatagency\CrudAssistant\InputCollection;
+use Juaniquillo\CrudAssistant\InputCollection;
 
 /**
  * Action Interface.

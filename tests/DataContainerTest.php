@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Chatagency\CrudAssistant\Tests;
+namespace Juaniquillo\CrudAssistant\Tests;
 
-use Chatagency\CrudAssistant\Contracts\DataContainerInterface;
-use Chatagency\CrudAssistant\DataContainer;
+use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
+use Juaniquillo\CrudAssistant\DataContainer;
 use PHPUnit\Framework\TestCase;
 
 class DataContainerTest extends TestCase
