@@ -157,10 +157,16 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
             $action->prepare();
         }
 
+        $identifier = $action->getIdentifier();
+
         foreach ($this->getInputs() as $input) {
-            $recipe = $input->getRecipe($action->getIdentifier());
+            $recipe = $input->getRecipe($identifier);
 
             if ($recipe && $recipe->isIgnored()) {
+                continue;
+            }
+
+            if (!$input->isFor($identifier)) {
                 continue;
             }
 
