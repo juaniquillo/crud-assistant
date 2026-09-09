@@ -26,7 +26,7 @@ jobs:
         run: composer analyse
 
       - name: Check Code Style (PHP-CS-Fixer)
-        run: vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php src tests
+        run: composer run format
 
       - name: Run Tests (PHPUnit)
         run: composer test
