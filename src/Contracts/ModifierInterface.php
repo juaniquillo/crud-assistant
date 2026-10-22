@@ -6,5 +6,5 @@ namespace Juaniquillo\CrudAssistant\Contracts;
 
 interface ModifierInterface
 {
-    public function modify($value, $model = null);
+    public function modify(mixed $value, ?object $model = null): mixed;
 }

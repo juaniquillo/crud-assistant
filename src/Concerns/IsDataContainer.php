@@ -4,10 +4,22 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Concerns;
 
+
+/**
+ * @template TKey of array-key
+ * @template TValue
+ */
 trait IsDataContainer
 {
+    /** 
+     * Bind the internal array to the template types.
+     * @var array<TKey, TValue> 
+     */
     protected array $data = [];
 
+    /**
+     * @param array<TKey, TValue> $data
+     */
     public function __construct(array $data = [])
     {
         $this->fill($data);
@@ -15,6 +27,7 @@ trait IsDataContainer
 
     /**
      * @throws \InvalidArgumentException
+     * @return TValue
      */
     public function __get(string $name): mixed
     {
@@ -25,8 +38,13 @@ trait IsDataContainer
         return $this->data[$name];
     }
 
-    public function __set(string $name, $value): void
+    /**
+     * @param TValue $value
+     */
+    public function __set(string $name, mixed $value): void
     {
+        /** @var TKey $name */
+        /** @phpstan-ignore varTag.nativeType */
         $this->data[$name] = $value;
     }
 
@@ -40,15 +58,17 @@ trait IsDataContainer
         unset($this->data[$name]);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return json_encode($this->data);
+        return json_encode($this->data) ?: '{}';
     }
 
     /**
+     * @param TKey $name
+     * @return TValue
      * @throws \InvalidArgumentException
      */
-    public function get(string $name)
+    public function get(mixed $name): mixed
     {
         if (!isset($this->data[$name])) {
             throw new \InvalidArgumentException();
@@ -57,13 +77,20 @@ trait IsDataContainer
         return $this->data[$name];
     }
 
-    public function set(string $name, mixed $value): static
+    /**
+     * @param TKey $name
+     * @param TValue $value
+     */
+    public function set(mixed $name, mixed $value): static
     {
         $this->data[$name] = $value;
 
         return $this;
     }
 
+    /**
+     * @param array<TKey, TValue> $data
+     */
     public function fill(array $data): static
     {
         $this->data = $data;
@@ -71,6 +98,9 @@ trait IsDataContainer
         return $this;
     }
 
+    /**
+     * @param array<TKey, TValue> $data
+     */
     public function add(array $data): static
     {
         $this->data = array_merge($this->data, $data);
@@ -78,13 +108,19 @@ trait IsDataContainer
         return $this;
     }
 
-    public function push($value): static
+    /**
+     * @param TValue $value
+     */
+    public function push(mixed $value): static
     {
         $this->data[] = $value;
 
         return $this;
     }
 
+    /**
+     * @param array<int, TKey> $keys
+     */
     public function contains(array $keys): bool
     {
         foreach ($keys as $key) {
@@ -97,10 +133,8 @@ trait IsDataContainer
     }
 
     /**
-     * Verifies if any of the keys
-     * in an array is missing in
-     * the container. Returns
-     * first key.
+     * @param array<int, TKey> $keys
+     * @return TKey|false
      */
     public function missing(array $keys): mixed
     {
@@ -113,19 +147,25 @@ trait IsDataContainer
         return false;
     }
 
+    /**
+     * @return array<TKey, TValue>
+     */
     public function toArray(): array
     {
         return $this->data;
     }
 
     /**
-     * toArray() method alias.
+     * @return array<TKey, TValue>
      */
     public function all(): array
     {
         return $this->toArray();
     }
 
+    /**
+     * @return \ArrayIterator<TKey, TValue>
+     */
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->data);
@@ -136,7 +176,11 @@ trait IsDataContainer
         return \count($this->data);
     }
 
-    public function offsetSet($offset, $value): void
+    /**
+     * @param TKey|null $offset
+     * @param TValue $value
+     */
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if ($offset === null) {
             $this->data[] = $value;
@@ -145,20 +189,28 @@ trait IsDataContainer
         }
     }
 
-    public function offsetExists($offset): bool
+    /**
+     * @param TKey $offset
+     */
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->data[$offset]);
     }
 
-    public function offsetUnset($offset): void
+    /**
+     * @param TKey $offset
+     */
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->data[$offset]);
     }
 
     /**
+     * @param TKey $offset
+     * @return TValue
      * @throws \InvalidArgumentException
      */
-    public function offsetGet($offset): mixed
+    public function offsetGet(mixed $offset): mixed
     {
         if (!\array_key_exists($offset, $this->data)) {
             throw new \InvalidArgumentException();

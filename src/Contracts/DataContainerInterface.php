@@ -4,69 +4,29 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Contracts;
 
-/**
- * Data DataContainer Interface.
- *
- * @property array $data
- */
 interface DataContainerInterface
 {
-    public function get(string $name);
+    public function get(string $name): mixed;
 
     public function set(string $name, mixed $value): static;
 
-    /**
-     * Fills the container. It replaces
-     * the current data array with
-     * the one provided.
-     *
-     * @return self
-     */
-    public function fill(array $data);
+    /** @param array<array-key, mixed> $data */
+    public function fill(array $data): static;
 
-    /**
-     * Adds values to the data array.
-     *
-     * @return self
-     */
-    public function add(array $data);
+    /** @param array<array-key, mixed> $data */
+    public function add(array $data): static;
 
-    /**
-     * Pushes a value to the data array.
-     *
-     * @return self
-     */
-    public function push($value);
+    public function push(mixed $value): static;
+    
+    /** @param array<array-key, mixed> $keys */
+    public function contains(array $keys): bool;
 
-    /**
-     * Verifies that all keys in an
-     * array are set.
-     *
-     * @return bool
-     */
-    public function contains(array $keys);
+    /** @param array<array-key, mixed> $keys */
+    public function missing(array $keys): mixed;
 
-    /**
-     * Verifies if any of the keys
-     * in an array is missing in
-     * the container. Returns
-     * first missing key.
-     *
-     * @return bool|string
-     */
-    public function missing(array $keys);
+    /** @return array<array-key, mixed> */
+    public function toArray(): array;
 
-    /**
-     * Returns the data array.
-     *
-     * @return array
-     */
-    public function toArray();
-
-    /**
-     * toArray() method alias.
-     *
-     * @return array
-     */
-    public function all();
+    /** @return array<array-key, mixed> */
+    public function all(): array;
 }

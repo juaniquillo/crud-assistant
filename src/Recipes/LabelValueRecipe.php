@@ -26,7 +26,7 @@ final class LabelValueRecipe implements RecipeInterface
     ) {
     }
 
-    public static function make(?string $label = null, $value = null): self
+    public static function make(\Closure|string|null $label = null, \Closure|string|null $value = null): self
     {
         return new self($label, $value);
     }

@@ -15,16 +15,16 @@ use Juaniquillo\CrudAssistant\Contracts\InputInterface;
 final class LabelValueAction extends Action implements ActionInterface
 {
     public function __construct(
-        private $model,
+        private object $model,
     ) {
     }
 
-    public static function make($model): self
+    public static function make(object $model): self
     {
         return new self($model);
     }
 
-    public function getModel()
+    public function getModel(): object
     {
         return $this->model;
     }
@@ -34,7 +34,7 @@ final class LabelValueAction extends Action implements ActionInterface
         return parent::prepare();
     }
 
-    public function execute(InputCollectionInterface|InputInterface|\IteratorAggregate $input)
+    public function execute(InputCollectionInterface|InputInterface|\IteratorAggregate $input): void
     {
         $model = $this->model;
 
@@ -60,6 +60,5 @@ final class LabelValueAction extends Action implements ActionInterface
 
         $output->{$label} = $value;
 
-        return $output;
     }
 }

@@ -11,9 +11,15 @@ use Juaniquillo\CrudAssistant\DataContainer;
 
 trait IsAction
 {
-    protected $output;
+    protected ?DataContainerInterface $output = null;
 
-    public function initOutput()
+    protected bool $controlsRecursion = false;
+
+    protected bool $controlsExecution = false;
+
+    protected bool $processInternalCollection = false;
+
+    public function initOutput(): static
     {
         if (!$this->output) {
             $this->output = new DataContainer();
@@ -22,12 +28,12 @@ trait IsAction
         return $this;
     }
 
-    public static function getIdentifier()
+    public static function getIdentifier(): string
     {
         return static::class;
     }
 
-    public function setControlsRecursion(bool $controlsRecursion)
+    public function setControlsRecursion(bool $controlsRecursion): static
     {
         $this->controlsRecursion = $controlsRecursion;
 
@@ -51,22 +57,22 @@ trait IsAction
         return $this;
     }
 
-    public function controlsRecursion()
+    public function controlsRecursion(): bool
     {
         return $this->controlsRecursion ?? false;
     }
 
-    public function controlsExecution()
+    public function controlsExecution(): bool
     {
         return $this->controlsExecution ?? false;
     }
 
-    public function processInternalCollection()
+    public function processInternalCollection(): bool
     {
         return $this->processInternalCollection ?? false;
     }
 
-    public function isEmpty($value)
+    public function isEmpty(mixed $value): mixed
     {
         return $value === '' || $value === null;
     }
@@ -78,7 +84,7 @@ trait IsAction
         return $this->output;
     }
 
-    protected function modifiers($value, InputInterface $input, $model = null)
+    protected function modifiers(mixed $value, InputInterface $input, ?object $model = null): mixed
     {
         $recipe = $input->getRecipe(static::class);
 
@@ -95,7 +101,7 @@ trait IsAction
         return $value;
     }
 
-    protected function executeModifier(ModifierInterface $modifier, $value, $model = null)
+    protected function executeModifier(ModifierInterface $modifier, mixed $value, ?object $model = null): mixed
     {
         return $modifier->modify($value, $model);
     }

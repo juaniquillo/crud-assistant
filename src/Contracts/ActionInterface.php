@@ -11,23 +11,23 @@ use Juaniquillo\CrudAssistant\InputCollection;
  */
 interface ActionInterface
 {
-    public function initOutput();
+    public function initOutput(): static;
 
-    public static function getIdentifier();
+    public static function getIdentifier(): string;
 
     public function setProcessInternalCollection(bool $processInternalCollection): static;
 
     public function prepare(): static;
 
-    public function execute(InputCollection|InputInterface|\IteratorAggregate $input);
+    public function execute(InputCollection|InputInterface|\IteratorAggregate $input): void;
 
     public function cleanup(): static;
 
-    public function controlsRecursion();
+    public function controlsRecursion(): bool;
 
-    public function controlsExecution();
+    public function controlsExecution(): bool;
 
-    public function processInternalCollection();
+    public function processInternalCollection(): bool;
 
     public function getOutput(): DataContainerInterface;
 }

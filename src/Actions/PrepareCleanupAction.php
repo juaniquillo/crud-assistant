@@ -20,13 +20,12 @@ class PrepareCleanupAction extends Action implements ActionInterface
         return parent::prepare();
     }
 
-    public function execute(InputCollectionInterface|InputInterface|\IteratorAggregate $input)
+    public function execute(InputCollectionInterface|InputInterface|\IteratorAggregate $input): void
     {
         $output = $this->getOutput();
 
         $output->{$input->getName()} = $input->getLabel();
 
-        return $output;
     }
 
     public function cleanup(): static

@@ -9,53 +9,19 @@ namespace Juaniquillo\CrudAssistant\Contracts;
  */
 interface RecipeInterface
 {
-    /**
-     * Returns recipe identifier.
-     *
-     * @return string
-     */
-    public function getIdentifier();
+    public function getIdentifier(): string;
 
-    /**
-     * Adds modifier to the array.
-     *
-     * @return self
-     */
-    public function setModifier(ModifierInterface $modifier);
+    public function ignore(bool $ignore = true): static;
 
-    /**
-     * Adds multiple modifiers to the
-     * modifiers array.
-     *
-     * @return self
-     */
-    public function setModifiers(array $modifiers);
+    public function setModifier(ModifierInterface $modifier): static;
 
-    /**
-     * Returns modifiers array.
-     *
-     * @return array
-     */
-    public function getModifiers();
+    /** @param array<int, ModifierInterface> $modifiers */
+    public function setModifiers(array $modifiers): static;
 
-    /**
-     * Checks if recipe has modifiers.
-     *
-     * @return bool
-     */
-    public function hasModifiers();
+    /** @return array<int, ModifierInterface> */
+    public function getModifiers(): array;
 
-    /**
-     * Sets the ignore value.
-     *
-     * @return self
-     */
-    public function ignore($ignore = true);
+    public function hasModifiers(): bool;
 
-    /**
-     * Checks if input is ignored.
-     *
-     * @return bool
-     */
-    public function isIgnored();
+    public function isIgnored(): bool;
 }

@@ -13,13 +13,17 @@ interface InputInterface
 
     public function setLabel(string $label): static;
 
-    public function setAttribute(string $name, $value): static;
+    public function setAttribute(string $name, int|string $value): static;
 
     public function setSubElements(InputCollectionInterface $subElements): static;
 
     public function setVersion(int $version): static;
 
     public function setType(string $type): static;
+
+    public function disablePrepare(): static;
+
+    public function disableCleanup(): static;
 
     public function getName(): ?string;
 
