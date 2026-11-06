@@ -14,12 +14,14 @@ final class CrudAssistant
 {
     private InputCollectionInterface $collection;
 
+    /** @param array<int|string, InputInterface> $inputs */
     public function __construct(array $inputs = [], ?string $name = null, ?string $label = null, ?InputCollectionInterface $collection = null)
     {
         $this->collection = $collection ?? new InputCollection($name, $label);
         $this->collection->setInputs($inputs);
     }
 
+    /** @param array<int|string, InputInterface> $inputs */
     public static function make(array $inputs = [], ?string $name = null, ?string $label = null, ?InputCollectionInterface $collection = null): InputCollectionInterface
     {
         return (new self($inputs, $name, $label, $collection))->getCollection();
@@ -35,7 +37,7 @@ final class CrudAssistant
         return is_a($input, InputCollectionInterface::class);
     }
 
-    public static function isClosure($instance): bool
+    public static function isClosure(mixed $instance): bool
     {
         return $instance instanceof \Closure;
     }

@@ -11,6 +11,8 @@ use Juaniquillo\CrudAssistant\Contracts\InputInterface;
 
 /**
  * Input Collection Class.
+ *
+ * @implements \IteratorAggregate<array-key, InputInterface>
  */
 class InputCollection extends Input implements InputInterface, InputCollectionInterface, \IteratorAggregate, \Countable
 {

@@ -35,6 +35,7 @@ interface InputInterface
 
     public function getAttribute(string $name): mixed;
 
+    /** @return array<string, int|string> */
     public function getAttributes(): array;
 
     public function unsetAttribute(string $key): static;
@@ -53,6 +54,7 @@ interface InputInterface
 
     public function getRecipe(string $recipe): ?RecipeInterface;
 
+    /** @return array<int|string, RecipeInterface> */
     public function getRecipes(): array;
 
     public function execute(ActionInterface $action): DataContainerInterface;

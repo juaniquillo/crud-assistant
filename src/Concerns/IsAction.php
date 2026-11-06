@@ -59,17 +59,17 @@ trait IsAction
 
     public function controlsRecursion(): bool
     {
-        return $this->controlsRecursion ?? false;
+        return $this->controlsRecursion;
     }
 
     public function controlsExecution(): bool
     {
-        return $this->controlsExecution ?? false;
+        return $this->controlsExecution;
     }
 
     public function processInternalCollection(): bool
     {
-        return $this->processInternalCollection ?? false;
+        return $this->processInternalCollection;
     }
 
     public function isEmpty(mixed $value): mixed

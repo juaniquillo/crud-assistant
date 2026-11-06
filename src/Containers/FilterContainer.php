@@ -16,6 +16,7 @@ use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
  */
 final class FilterContainer implements \ArrayAccess, \Countable, DataContainerInterface, \IteratorAggregate
 {
+    /** @use IsDataContainer<TKey, TValue> */
     use IsDataContainer;
 
     /**
