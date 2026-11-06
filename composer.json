@@ -26,10 +26,7 @@
     "autoload": {
         "psr-4": {
             "Juaniquillo\\CrudAssistant\\": "src"
-        },
-        "files": [
-          "helpers/helpers.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
