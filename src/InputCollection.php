@@ -188,7 +188,6 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         }
 
         return $action->getOutput();
-
     }
 
     public function executeAll(ActionInterface $action): void
@@ -196,7 +195,6 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         $action->prepare();
         $action->execute($this);
         $action->cleanup();
-
     }
 
     public function getIterator(): \Traversable

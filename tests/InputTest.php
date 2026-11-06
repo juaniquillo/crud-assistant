@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 class InputTest extends TestCase
 {
-    public function testAnInputCanBeCreatedWithJustAName()
+    public function testAnInputCanBeCreatedWithJustAName(): void
     {
         $input = new TextInput('name');
 
@@ -27,7 +27,7 @@ class InputTest extends TestCase
         $this->assertEquals(1, $input->getVersion());
     }
 
-    public function testAnActionRecipeCanCanBeAddedToAnInput()
+    public function testAnActionRecipeCanCanBeAddedToAnInput(): void
     {
         $value = [
             'label' => 'This is an email',
@@ -40,7 +40,7 @@ class InputTest extends TestCase
         $this->assertEquals($input->getRecipe(LabelValueAction::class)->label, $value['label']);
     }
 
-    public function testIfRecipeDoesNotExistInClassNullIsReturned()
+    public function testIfRecipeDoesNotExistInClassNullIsReturned(): void
     {
         $input = new TextInput('email', 'Email');
         $input->setType('email');
@@ -48,7 +48,7 @@ class InputTest extends TestCase
         $this->assertNull($input->getRecipe(LabelValueAction::class));
     }
 
-    public function testTheNameLabelVersionAndTypeCanBeSetAfterTheInputHasBeenInstantiated()
+    public function testTheNameLabelVersionAndTypeCanBeSetAfterTheInputHasBeenInstantiated(): void
     {
         $input = new TextInput('email');
 
@@ -63,7 +63,7 @@ class InputTest extends TestCase
         $this->assertEquals(2, $input->getVersion());
     }
 
-    public function testAnArbitraryAttributeCanBeAddedToAnInputClass()
+    public function testAnArbitraryAttributeCanBeAddedToAnInputClass(): void
     {
         $input = new TextInput('email');
         $input->setType('email');
@@ -76,7 +76,7 @@ class InputTest extends TestCase
         $this->assertCount(1, $input->getAttributes());
     }
 
-    public function testAnArbitraryAttributeCanBeRemovedFromAnInputClass()
+    public function testAnArbitraryAttributeCanBeRemovedFromAnInputClass(): void
     {
         $input = new TextInput('email');
         $input->setType('email');
@@ -93,7 +93,7 @@ class InputTest extends TestCase
         $this->assertCount(0, $input->getAttributes());
     }
 
-    public function testSubElementsCanBeAddedToAnInputClass()
+    public function testSubElementsCanBeAddedToAnInputClass(): void
     {
         $input = new SelectInput('hobbies', 'Your Hobbies');
         $hobbies = new InputCollection();
@@ -108,7 +108,7 @@ class InputTest extends TestCase
         $this->assertCount(3, $input->getSubElements());
     }
 
-    public function testSubElementsAreAnInputCollectionWithInputs()
+    public function testSubElementsAreAnInputCollectionWithInputs(): void
     {
         $input = new SelectInput('hobbies', 'Your Hobbies');
         $hobbies = new InputCollection();

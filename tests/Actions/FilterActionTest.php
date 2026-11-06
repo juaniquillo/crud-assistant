@@ -13,14 +13,14 @@ use PHPUnit\Framework\TestCase;
 
 class FilterActionTest extends TestCase
 {
-    public function testMakeCanBeUsedToGetAnInstanceOfFilterAction()
+    public function testMakeCanBeUsedToGetAnInstanceOfFilterAction(): void
     {
         $recipe = FilterAction::make();
 
         $this->assertInstanceOf(FilterAction::class, $recipe);
     }
 
-    public function testAFilterActionIsUsedToExcludeInputDataFromDataset()
+    public function testAFilterActionIsUsedToExcludeInputDataFromDataset(): void
     {
         $filter = new FilterAction();
 
@@ -48,7 +48,7 @@ class FilterActionTest extends TestCase
         $this->assertFalse(isset($filtered->data[$email->getName()]));
     }
 
-    public function testAnInternalInputCollectionCanBeUsedOnTheFilterActionForOrganizationPurposes()
+    public function testAnInternalInputCollectionCanBeUsedOnTheFilterActionForOrganizationPurposes(): void
     {
         $filter = new FilterAction();
 
@@ -86,7 +86,7 @@ class FilterActionTest extends TestCase
         $this->assertCount(3, $filtered->data);
     }
 
-    public function testAClosureCanBePassedAsAValueInsteadOfAnArrayToTheFilterAction()
+    public function testAClosureCanBePassedAsAValueInsteadOfAnArrayToTheFilterAction(): void
     {
         $name = new TextInput('name', 'Name');
 
@@ -120,7 +120,7 @@ class FilterActionTest extends TestCase
         $this->assertFalse(isset($filtered->data[$email->getName()]));
     }
 
-    public function testIfIgnoreIfEmptyIsPassedToTheFilterActionThatItemIsAlsoFiltered()
+    public function testIfIgnoreIfEmptyIsPassedToTheFilterActionThatItemIsAlsoFiltered(): void
     {
         $name = new TextInput('name', 'Name');
 

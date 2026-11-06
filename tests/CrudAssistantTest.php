@@ -11,14 +11,14 @@ use PHPUnit\Framework\TestCase;
 
 class CrudAssistantTest extends TestCase
 {
-    public function testWhenTheMakeMethodIsCalledOnCrudAssistantAnInputCollectionInstanceIsReturned()
+    public function testWhenTheMakeMethodIsCalledOnCrudAssistantAnInputCollectionInstanceIsReturned(): void
     {
         $manager = CrudAssistant::make([]);
 
         $this->assertInstanceOf(InputCollectionInterface::class, $manager);
     }
 
-    public function testAnArrayOfInputsInstancesCanBePassedToTheConstructor()
+    public function testAnArrayOfInputsInstancesCanBePassedToTheConstructor(): void
     {
         $inputs = [
             new TextInput('name'),

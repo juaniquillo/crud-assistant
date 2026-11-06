@@ -25,7 +25,6 @@ class PrepareCleanupAction extends Action implements ActionInterface
         $output = $this->getOutput();
 
         $output->{$input->getName()} = $input->getLabel();
-
     }
 
     public function cleanup(): static

@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 class LabelValueActionTest extends TestCase
 {
-    public function testMakeCanBeUsedToGetAnInstanceOfLabelAction()
+    public function testMakeCanBeUsedToGetAnInstanceOfLabelAction(): void
     {
         $model = new DataContainer([
             'name' => 'John Doe',
@@ -28,7 +28,7 @@ class LabelValueActionTest extends TestCase
         $this->assertInstanceOf(LabelValueAction::class, $recipe);
     }
 
-    public function testTheLabelValueActionReturnsAnContainerWithLabelsAsKeys()
+    public function testTheLabelValueActionReturnsAnContainerWithLabelsAsKeys(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -54,7 +54,7 @@ class LabelValueActionTest extends TestCase
         $this->assertEquals($model->$emailName, $output->$emailLabel);
     }
 
-    public function testAnInternalCollectionCanBeUsedOnTheLabelActionForOrganizationPurposes()
+    public function testAnInternalCollectionCanBeUsedOnTheLabelActionForOrganizationPurposes(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -85,7 +85,7 @@ class LabelValueActionTest extends TestCase
         $this->assertCount(4, $output);
     }
 
-    public function testAClosureCanBeUsedToAlterTheLabelOnTheLabelValueAction()
+    public function testAClosureCanBeUsedToAlterTheLabelOnTheLabelValueAction(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -129,7 +129,7 @@ class LabelValueActionTest extends TestCase
         $this->assertNotEquals($output->$emailLabel, $model->email);
     }
 
-    public function testModifiersCanBeAddedToTheLabelValueActionRecipe()
+    public function testModifiersCanBeAddedToTheLabelValueActionRecipe(): void
     {
         $name = new TextInput('name', 'Name');
         $accept = new TextInput('accept', 'Accept Terms');

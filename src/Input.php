@@ -143,7 +143,7 @@ abstract class Input implements InputInterface
 
         return $this;
     }
-    
+
     /** @param array<int|string, class-string<ActionInterface>> $actions */
     public function onlyFor(array $actions): static
     {

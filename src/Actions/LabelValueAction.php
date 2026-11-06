@@ -59,6 +59,5 @@ final class LabelValueAction extends Action implements ActionInterface
         $value = $this->modifiers($value, $input, $model);
 
         $output->{$label} = $value;
-
     }
 }

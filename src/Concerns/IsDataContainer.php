@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Concerns;
 
-
 /**
  * @template TKey of array-key
  * @template TValue
  */
 trait IsDataContainer
 {
-    /** 
+    /**
      * Bind the internal array to the template types.
-     * @var array<TKey, TValue> 
+     *
+     * @var array<TKey, TValue>
      */
     protected array $data = [];
 
@@ -27,6 +27,7 @@ trait IsDataContainer
 
     /**
      * @throws \InvalidArgumentException
+     *
      * @return TValue
      */
     public function __get(string $name): mixed
@@ -43,8 +44,8 @@ trait IsDataContainer
      */
     public function __set(string $name, mixed $value): void
     {
-        /** @var TKey $name */
-        /** @phpstan-ignore varTag.nativeType */
+        // @var TKey $name
+        // @phpstan-ignore varTag.nativeType
         $this->data[$name] = $value;
     }
 
@@ -65,8 +66,10 @@ trait IsDataContainer
 
     /**
      * @param TKey $name
-     * @return TValue
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return TValue
      */
     public function get(mixed $name): mixed
     {
@@ -78,7 +81,7 @@ trait IsDataContainer
     }
 
     /**
-     * @param TKey $name
+     * @param TKey   $name
      * @param TValue $value
      */
     public function set(mixed $name, mixed $value): static
@@ -134,7 +137,8 @@ trait IsDataContainer
 
     /**
      * @param array<int, TKey> $keys
-     * @return TKey|false
+     *
+     * @return false|TKey
      */
     public function missing(array $keys): mixed
     {
@@ -178,7 +182,7 @@ trait IsDataContainer
 
     /**
      * @param TKey|null $offset
-     * @param TValue $value
+     * @param TValue    $value
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
@@ -207,8 +211,10 @@ trait IsDataContainer
 
     /**
      * @param TKey $offset
-     * @return TValue
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return TValue
      */
     public function offsetGet(mixed $offset): mixed
     {

@@ -20,7 +20,7 @@ final class FilterAction extends Action implements ActionInterface
     protected bool $controlsExecution = true;
 
     protected bool $controlsRecursion = true;
-    
+
     /** @param array<int|string, mixed> $data */
     public function __construct(private array $data = [])
     {

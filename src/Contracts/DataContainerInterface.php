@@ -15,13 +15,15 @@ interface DataContainerInterface extends \IteratorAggregate, \Countable, \ArrayA
 {
     /**
      * @param TKey $name
-     * @return TValue
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return TValue
      */
     public function get(mixed $name): mixed;
 
     /**
-     * @param TKey $name
+     * @param TKey   $name
      * @param TValue $value
      */
     public function set(mixed $name, mixed $value): static;
@@ -40,7 +42,8 @@ interface DataContainerInterface extends \IteratorAggregate, \Countable, \ArrayA
 
     /**
      * @param array<int, TKey> $keys
-     * @return TKey|false
+     *
+     * @return false|TKey
      */
     public function missing(array $keys): mixed;
 

@@ -32,7 +32,7 @@ interface InputCollectionInterface extends InputInterface, \IteratorAggregate
 
     /** @return array<int|string, InputInterface> */
     public function getInputs(bool $all = false): array;
-    
+
     /** @return array<int|string, string> */
     public function getInputNames(): array;
 
