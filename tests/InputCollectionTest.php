@@ -36,15 +36,15 @@ class InputCollectionTest extends TestCase
         $this->assertCount(1, $form->getInputs());
     }
 
-    public function testIssetCanBeUsedToCheckIfAnInputExists()
+    public function testHasCanBeUsedToCheckIfAnInputExists()
     {
         $form = new InputCollection();
 
         $form->addInput(new TextInput('name', 'Name'));
         $form->addInput(new TextInput('email', 'Email'));
 
-        $this->assertTrue($form->isset('name'));
-        $this->assertFalse($form->isset('does_no_exist'));
+        $this->assertTrue($form->has('name'));
+        $this->assertFalse($form->has('does_no_exist'));
     }
 
     public function testAnExceptionIsThrownIfANonExistingInputIsAccessed()

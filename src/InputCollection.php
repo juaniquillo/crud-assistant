@@ -8,6 +8,7 @@ use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
 use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputInterface;
+use Juaniquillo\CrudAssistant\Support\InputHelper;
 
 /**
  * Input Collection Class.
@@ -82,7 +83,7 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return \count($this->getInputs());
     }
 
-    public function isset(string $key): bool
+    public function has(string $key): bool
     {
         return isset($this->inputsArray[$key]);
     }
@@ -159,13 +160,13 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
                 continue;
             }
 
-            if (CrudAssistant::isInputCollection($input) && $action->controlsRecursion()) {
+            if (InputHelper::isCollection($input) && $action->controlsRecursion()) {
                 $action->execute($input);
 
                 continue;
             }
 
-            if (CrudAssistant::isInputCollection($input)) {
+            if (InputHelper::isCollection($input)) {
                 $input->disablePrepare()
                     ->disableCleanup();
 

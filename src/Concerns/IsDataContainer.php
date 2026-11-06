@@ -101,7 +101,7 @@ trait IsDataContainer
     /**
      * @param array<TKey, TValue> $data
      */
-    public function add(array $data): static
+    public function merge(array $data): static
     {
         $this->data = array_merge($this->data, $data);
 

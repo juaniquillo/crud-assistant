@@ -43,12 +43,12 @@ class DataContainerTest extends TestCase
         $this->assertEquals('value', $container[0]);
     }
 
-    public function testValuesCanBeAddedToTheContainerAfterItHasBeenInstantiated()
+    public function testValuesCanBeMergedIntoTheContainerAfterItHasBeenInstantiated()
     {
         $container = new DataContainer([
             'key' => 'value',
         ]);
-        $container->add([
+        $container->merge([
             'another' => 'day',
         ]);
 

@@ -14,7 +14,7 @@ interface DataContainerInterface
     public function fill(array $data): static;
 
     /** @param array<array-key, mixed> $data */
-    public function add(array $data): static;
+    public function merge(array $data): static;
 
     public function push(mixed $value): static;
     

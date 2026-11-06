@@ -6,8 +6,10 @@ namespace Juaniquillo\CrudAssistant\Contracts;
 
 /**
  * Input Collection Interface.
+ *
+ * @extends \IteratorAggregate<array-key, InputInterface>
  */
-interface InputCollectionInterface extends InputInterface
+interface InputCollectionInterface extends InputInterface, \IteratorAggregate
 {
     /** @param array<int|string, InputInterface> $inputsArray */
     public function setInputs(array $inputsArray): static;
@@ -24,7 +26,7 @@ interface InputCollectionInterface extends InputInterface
 
     public function count(): int;
 
-    public function isset(string $key): bool;
+    public function has(string $key): bool;
 
     public function getInput(string $key): InputInterface;
 

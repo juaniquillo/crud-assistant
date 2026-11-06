@@ -10,7 +10,7 @@ use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
 use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputInterface;
-use Juaniquillo\CrudAssistant\CrudAssistant;
+use Juaniquillo\CrudAssistant\Support\InputHelper;
 
 /**
  * Filter action.
@@ -49,7 +49,7 @@ final class FilterAction extends Action implements ActionInterface
 
     public function executeOne(InputCollectionInterface|InputInterface|\IteratorAggregate $input): DataContainerInterface
     {
-        if (CrudAssistant::isInputCollection($input) && $this->controlsRecursion) {
+        if (InputHelper::isCollection($input) && $this->controlsRecursion) {
             foreach ($input as $val) {
                 $this->executeOne($val);
             }
