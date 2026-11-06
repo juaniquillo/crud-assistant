@@ -31,14 +31,4 @@ final class CrudAssistant
     {
         return $this->collection;
     }
-
-    public static function isInputCollection(InputInterface $input): bool
-    {
-        return is_a($input, InputCollectionInterface::class);
-    }
-
-    public static function isClosure(mixed $instance): bool
-    {
-        return $instance instanceof \Closure;
-    }
 }
