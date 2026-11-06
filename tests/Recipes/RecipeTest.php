@@ -37,7 +37,7 @@ class RecipeTest extends TestCase
         $recipe = LabelValueRecipe::make('L', 'V');
 
         $input->setRecipe($recipe);
-        $this->assertNotNull($input->getRecipe(LabelValueAction::class));
-        $this->assertEquals($recipe, $input->getRecipe(LabelValueAction::class));
+        $this->assertNotNull($input->getRecipe(LabelValueAction::getIdentifier()));
+        $this->assertEquals($recipe, $input->getRecipe(LabelValueAction::getIdentifier()));
     }
 }

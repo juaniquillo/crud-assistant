@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class BooleanModifierTest extends TestCase
 {
-    public function testTheIsBooleanModifierChangesTheLabelOfABooleanValue()
+    public function testTheIsBooleanModifierChangesTheLabelOfABooleanValue(): void
     {
         $modifier = new BooleanModifier();
 
@@ -21,7 +21,7 @@ class BooleanModifierTest extends TestCase
         $this->assertEquals('No', $newFalseValue);
     }
 
-    public function testTheIsBooleanModifierLabelsCanBeChangedUsingTheSecondArgument()
+    public function testTheIsBooleanModifierLabelsCanBeChangedUsingTheSecondArgument(): void
     {
         $data = new DataContainer([
             'trueLabel' => 'Correct',

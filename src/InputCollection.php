@@ -8,21 +8,22 @@ use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
 use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputInterface;
+use Juaniquillo\CrudAssistant\Support\InputHelper;
 
 /**
  * Input Collection Class.
+ *
+ * @implements \IteratorAggregate<array-key, InputInterface>
  */
 class InputCollection extends Input implements InputInterface, InputCollectionInterface, \IteratorAggregate, \Countable
 {
+    /** @var InputInterface[] */
     protected array $inputsArray = [];
 
+    /** @var InputInterface[] */
     protected array $partialCollection = [];
 
-    protected bool $prepare = true;
-
-    protected bool $cleanup = true;
-
-    public function setInputs(array $inputsArray)
+    public function setInputs(array $inputsArray): static
     {
         foreach ($inputsArray as $input) {
             $this->addInput($input);
@@ -31,7 +32,7 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $this;
     }
 
-    public function addInput(InputInterface $input, ?string $key = null)
+    public function addInput(InputInterface $input, ?string $key = null): static
     {
         $key ??= $input->getName();
 
@@ -40,7 +41,7 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $this;
     }
 
-    public function removeInput(string $key)
+    public function removeInput(string $key): static
     {
         if (isset($this->inputsArray[$key])) {
             unset($this->inputsArray[$key]);
@@ -52,7 +53,8 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $this;
     }
 
-    public function setPartialCollection(array $partialCollection)
+    /** @param array<int|string, string> $partialCollection */
+    public function setPartialCollection(array $partialCollection): static
     {
         if (!\count($partialCollection)) {
             throw new \Exception('The array passed is empty', 500);
@@ -71,7 +73,7 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $this;
     }
 
-    public function getPartialCollection()
+    public function getPartialCollection(): array
     {
         return $this->partialCollection;
     }
@@ -81,32 +83,18 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return \count($this->getInputs());
     }
 
-    public function disablePrepare()
-    {
-        $this->prepare = false;
-
-        return $this;
-    }
-
-    public function disableCleanup()
-    {
-        $this->cleanup = false;
-
-        return $this;
-    }
-
-    public function isset(string $key)
+    public function has(string $key): bool
     {
         return isset($this->inputsArray[$key]);
     }
 
-    public function getInput(string $key)
+    public function getInput(string $key): InputInterface
     {
         if (isset($this->inputsArray[$key])) {
             return $this->inputsArray[$key];
         }
 
-        throw new \InvalidArgumentException('The '.$key.' Input has not been registered or does not exist', 500);
+        throw new \InvalidArgumentException("The {$key} Input has not been registered or does not exist", 500);
     }
 
     /**
@@ -114,7 +102,7 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
      * If partial inputs have been set
      * it returns partial inputs.
      */
-    public function getInputs(bool $all = false)
+    public function getInputs(bool $all = false): array
     {
         $partialCollection = $this->getPartialCollection();
 
@@ -125,7 +113,7 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $this->inputsArray;
     }
 
-    public function getInputNames()
+    public function getInputNames(): array
     {
         $names = [];
 
@@ -136,7 +124,7 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $names;
     }
 
-    public function getInputLabels()
+    public function getInputLabels(): array
     {
         $labels = [];
 
@@ -147,10 +135,13 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $labels;
     }
 
+    /** @return DataContainerInterface<mixed> */
     public function execute(ActionInterface $action): DataContainerInterface
     {
         if ($action->controlsExecution()) {
-            return $this->executeAll($action);
+            $this->executeAll($action);
+
+            return $action->getOutput();
         }
 
         if ($this->prepare) {
@@ -170,13 +161,13 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
                 continue;
             }
 
-            if (CrudAssistant::isInputCollection($input) && $action->controlsRecursion()) {
+            if (InputHelper::isCollection($input) && $action->controlsRecursion()) {
                 $action->execute($input);
 
                 continue;
             }
 
-            if (CrudAssistant::isInputCollection($input)) {
+            if (InputHelper::isCollection($input)) {
                 $input->disablePrepare()
                     ->disableCleanup();
 
@@ -199,13 +190,11 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $action->getOutput();
     }
 
-    public function executeAll(ActionInterface $action): DataContainerInterface
+    public function executeAll(ActionInterface $action): void
     {
         $action->prepare();
         $action->execute($this);
         $action->cleanup();
-
-        return $action->getOutput();
     }
 
     public function getIterator(): \Traversable

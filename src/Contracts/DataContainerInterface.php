@@ -5,68 +5,50 @@ declare(strict_types=1);
 namespace Juaniquillo\CrudAssistant\Contracts;
 
 /**
- * Data DataContainer Interface.
+ * @template TValue
  *
- * @property array $data
+ * @extends \IteratorAggregate<array-key, TValue>
+ * @extends \ArrayAccess<array-key, TValue>
  */
-interface DataContainerInterface
+interface DataContainerInterface extends \IteratorAggregate, \Countable, \ArrayAccess
 {
-    public function get(string $name);
-
-    public function set(string $name, mixed $value): static;
+    /**
+     * @param array-key $name
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return TValue
+     */
+    public function get(mixed $name): mixed;
 
     /**
-     * Fills the container. It replaces
-     * the current data array with
-     * the one provided.
-     *
-     * @return self
+     * @param array-key $name
+     * @param TValue    $value
      */
-    public function fill(array $data);
+    public function set(mixed $name, mixed $value): static;
+
+    /** @param array<array-key, TValue> $data */
+    public function fill(array $data): static;
+
+    /** @param array<array-key, TValue> $data */
+    public function merge(array $data): static;
+
+    /** @param TValue $value */
+    public function push(mixed $value): static;
+
+    /** @param array<int, array-key> $keys */
+    public function contains(array $keys): bool;
 
     /**
-     * Adds values to the data array.
+     * @param array<int, array-key> $keys
      *
-     * @return self
+     * @return array-key|false
      */
-    public function add(array $data);
+    public function missing(array $keys): mixed;
 
-    /**
-     * Pushes a value to the data array.
-     *
-     * @return self
-     */
-    public function push($value);
+    /** @return array<array-key, TValue> */
+    public function toArray(): array;
 
-    /**
-     * Verifies that all keys in an
-     * array are set.
-     *
-     * @return bool
-     */
-    public function contains(array $keys);
-
-    /**
-     * Verifies if any of the keys
-     * in an array is missing in
-     * the container. Returns
-     * first missing key.
-     *
-     * @return bool|string
-     */
-    public function missing(array $keys);
-
-    /**
-     * Returns the data array.
-     *
-     * @return array
-     */
-    public function toArray();
-
-    /**
-     * toArray() method alias.
-     *
-     * @return array
-     */
-    public function all();
+    /** @return array<array-key, TValue> */
+    public function all(): array;
 }

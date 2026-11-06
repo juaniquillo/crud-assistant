@@ -10,21 +10,21 @@ use PHPUnit\Framework\TestCase;
 
 class DataContainerTest extends TestCase
 {
-    public function testMakeCanBeUsedToInstantiateAContainer()
+    public function testMakeCanBeUsedToInstantiateAContainer(): void
     {
         $container = DataContainer::make();
 
         $this->assertInstanceOf(DataContainerInterface::class, $container);
     }
 
-    public function testAnArbitraryKeyAndValuePairCanBeSet()
+    public function testAnArbitraryKeyAndValuePairCanBeSet(): void
     {
         $container = new DataContainer();
         $container->newKey = 'New content';
         $this->assertEquals('New content', $container->newKey);
     }
 
-    public function testAContainerCanBeFillAfterItHasBeenInstantiated()
+    public function testAContainerCanBeFillAfterItHasBeenInstantiated(): void
     {
         $container = new DataContainer();
         $container->fill([
@@ -34,7 +34,7 @@ class DataContainerTest extends TestCase
         $this->assertEquals('value', $container->key);
     }
 
-    public function testAValueCanBePushedToACollection()
+    public function testAValueCanBePushedToACollection(): void
     {
         $container = new DataContainer();
         $container->push('value');
@@ -43,12 +43,12 @@ class DataContainerTest extends TestCase
         $this->assertEquals('value', $container[0]);
     }
 
-    public function testValuesCanBeAddedToTheContainerAfterItHasBeenInstantiated()
+    public function testValuesCanBeMergedIntoTheContainerAfterItHasBeenInstantiated(): void
     {
         $container = new DataContainer([
             'key' => 'value',
         ]);
-        $container->add([
+        $container->merge([
             'another' => 'day',
         ]);
 
@@ -56,7 +56,7 @@ class DataContainerTest extends TestCase
         $this->assertEquals('day', $container->another);
     }
 
-    public function testIfANonExistingValueIsAccessedAPhpNoticeIsTriggered()
+    public function testIfANonExistingValueIsAccessedAPhpNoticeIsTriggered(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -65,7 +65,7 @@ class DataContainerTest extends TestCase
         $container->nope;
     }
 
-    public function testIssetCanBeUsedToVerifyIfValueExists()
+    public function testIssetCanBeUsedToVerifyIfValueExists(): void
     {
         $container = new DataContainer();
         $container->dollars = '$10.00';
@@ -74,7 +74,7 @@ class DataContainerTest extends TestCase
         $this->assertFalse(isset($container->euros));
     }
 
-    public function testUnsetCanBeUsedToDeleteValues()
+    public function testUnsetCanBeUsedToDeleteValues(): void
     {
         $container = new DataContainer();
         $container->new = 'look';
@@ -84,7 +84,7 @@ class DataContainerTest extends TestCase
         $this->assertFalse(isset($container->new));
     }
 
-    public function testTheContainsMethodCanBeUsedToVerifyIfMultipleKeysHaveBeenSet()
+    public function testTheContainsMethodCanBeUsedToVerifyIfMultipleKeysHaveBeenSet(): void
     {
         $values = ['new' => 'look', 'old' => 'story'];
         $container = new DataContainer($values);
@@ -94,7 +94,7 @@ class DataContainerTest extends TestCase
         $this->assertFalse($container->contains(array_keys($values)));
     }
 
-    public function testTheMissingMethodCanBeUsedToVerifyIfMultipleKeysHaveNotBeenSet()
+    public function testTheMissingMethodCanBeUsedToVerifyIfMultipleKeysHaveNotBeenSet(): void
     {
         $values = ['new' => 'look', 'old' => 'story'];
         $container = new DataContainer($values);
@@ -104,7 +104,18 @@ class DataContainerTest extends TestCase
         $this->assertEquals('new', $container->missing(array_keys($values)));
     }
 
-    public function testAllValuesCanBeAccessUsingTheAllMethod()
+    public function testNullValuesAreTreatedAsExistingKeys(): void
+    {
+        $container = new DataContainer(['name' => null]);
+
+        $this->assertNull($container->get('name'));
+        $this->assertNull($container->name);
+        $this->assertNull($container['name']);
+        $this->assertTrue($container->contains(['name']));
+        $this->assertFalse($container->missing(['name']));
+    }
+
+    public function testAllValuesCanBeAccessUsingTheAllMethod(): void
     {
         $container = new DataContainer();
         $container->dollars = '$10.00';
@@ -117,7 +128,7 @@ class DataContainerTest extends TestCase
         $this->assertCount(3, $content);
     }
 
-    public function testAllValuesCanAlsoBeAccessUsingTheToArrayMethod()
+    public function testAllValuesCanAlsoBeAccessUsingTheToArrayMethod(): void
     {
         $container = new DataContainer();
         $container->dollars = '$10.00';
@@ -130,7 +141,7 @@ class DataContainerTest extends TestCase
         $this->assertCount(3, $content);
     }
 
-    public function testCountCanBeUsedOnADataContainerObject()
+    public function testCountCanBeUsedOnADataContainerObject(): void
     {
         $container = new DataContainer();
         $container->dollars = '$10.00';
@@ -140,7 +151,7 @@ class DataContainerTest extends TestCase
         $this->assertCount(3, $container);
     }
 
-    public function testADataContainerCanAlsoBeTreatedAsAnArray()
+    public function testADataContainerCanAlsoBeTreatedAsAnArray(): void
     {
         $container = new DataContainer();
         $container['dollars'] = '$10.00';
@@ -159,7 +170,7 @@ class DataContainerTest extends TestCase
         $this->assertFalse(isset($container['dollars']));
     }
 
-    public function testIfANonExistingValueIsAccessedAsAnArrayAPhpNoticeIsTriggered()
+    public function testIfANonExistingValueIsAccessedAsAnArrayAPhpNoticeIsTriggered(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -168,7 +179,7 @@ class DataContainerTest extends TestCase
         $container['nope'];
     }
 
-    public function testADataContainerObjectCanBeIteratedOver()
+    public function testADataContainerObjectCanBeIteratedOver(): void
     {
         $container = new DataContainer();
         $container->dollars = '$10.00';
@@ -183,7 +194,7 @@ class DataContainerTest extends TestCase
         $this->assertEquals($newArray, $container->all());
     }
 
-    public function testADataContainerOutputsJsonWhenEchoed()
+    public function testADataContainerOutputsJsonWhenEchoed(): void
     {
         $container = new DataContainer();
         $container->dollars = '$10.00';

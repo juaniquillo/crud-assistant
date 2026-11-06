@@ -20,7 +20,8 @@ class PrepareCleanupActionTest extends TestCase
         $this->assertEquals(1, $action->getOutput()->get('prepare') ?? 0);
 
         $input = new TextInput('test', 'Test Label');
-        $result = $action->execute($input);
+        $action->execute($input);
+        $result = $action->getOutput();
         $this->assertEquals('Test Label', $result->test);
 
         $action->cleanup();

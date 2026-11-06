@@ -4,10 +4,21 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Concerns;
 
+/**
+ * @template TValue
+ */
 trait IsDataContainer
 {
+    /**
+     * Bind the internal array to the template type.
+     *
+     * @var array<array-key, TValue>
+     */
     protected array $data = [];
 
+    /**
+     * @param array<array-key, TValue> $data
+     */
     public function __construct(array $data = [])
     {
         $this->fill($data);
@@ -15,17 +26,22 @@ trait IsDataContainer
 
     /**
      * @throws \InvalidArgumentException
+     *
+     * @return TValue
      */
     public function __get(string $name): mixed
     {
         if (!\array_key_exists($name, $this->data)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException("The {$name} key does not exist in the container.");
         }
 
         return $this->data[$name];
     }
 
-    public function __set(string $name, $value): void
+    /**
+     * @param TValue $value
+     */
+    public function __set(string $name, mixed $value): void
     {
         $this->data[$name] = $value;
     }
@@ -40,30 +56,41 @@ trait IsDataContainer
         unset($this->data[$name]);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return json_encode($this->data);
+        return json_encode($this->data) ?: '{}';
     }
 
     /**
+     * @param array-key $name
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return TValue
      */
-    public function get(string $name)
+    public function get(mixed $name): mixed
     {
-        if (!isset($this->data[$name])) {
-            throw new \InvalidArgumentException();
+        if (!\array_key_exists($name, $this->data)) {
+            throw new \InvalidArgumentException("The {$name} key does not exist in the container.");
         }
 
         return $this->data[$name];
     }
 
-    public function set(string $name, mixed $value): static
+    /**
+     * @param array-key $name
+     * @param TValue    $value
+     */
+    public function set(mixed $name, mixed $value): static
     {
         $this->data[$name] = $value;
 
         return $this;
     }
 
+    /**
+     * @param array<array-key, TValue> $data
+     */
     public function fill(array $data): static
     {
         $this->data = $data;
@@ -71,24 +98,33 @@ trait IsDataContainer
         return $this;
     }
 
-    public function add(array $data): static
+    /**
+     * @param array<array-key, TValue> $data
+     */
+    public function merge(array $data): static
     {
         $this->data = array_merge($this->data, $data);
 
         return $this;
     }
 
-    public function push($value): static
+    /**
+     * @param TValue $value
+     */
+    public function push(mixed $value): static
     {
         $this->data[] = $value;
 
         return $this;
     }
 
+    /**
+     * @param array<int, array-key> $keys
+     */
     public function contains(array $keys): bool
     {
         foreach ($keys as $key) {
-            if (!isset($this->data[$key])) {
+            if (!\array_key_exists($key, $this->data)) {
                 return false;
             }
         }
@@ -97,15 +133,14 @@ trait IsDataContainer
     }
 
     /**
-     * Verifies if any of the keys
-     * in an array is missing in
-     * the container. Returns
-     * first key.
+     * @param array<int, array-key> $keys
+     *
+     * @return array-key|false
      */
     public function missing(array $keys): mixed
     {
         foreach ($keys as $key) {
-            if (!isset($this->data[$key])) {
+            if (!\array_key_exists($key, $this->data)) {
                 return $key;
             }
         }
@@ -113,19 +148,25 @@ trait IsDataContainer
         return false;
     }
 
+    /**
+     * @return array<array-key, TValue>
+     */
     public function toArray(): array
     {
         return $this->data;
     }
 
     /**
-     * toArray() method alias.
+     * @return array<array-key, TValue>
      */
     public function all(): array
     {
         return $this->toArray();
     }
 
+    /**
+     * @return \ArrayIterator<array-key, TValue>
+     */
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->data);
@@ -136,7 +177,11 @@ trait IsDataContainer
         return \count($this->data);
     }
 
-    public function offsetSet($offset, $value): void
+    /**
+     * @param array-key|null $offset
+     * @param TValue         $value
+     */
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         if ($offset === null) {
             $this->data[] = $value;
@@ -145,23 +190,33 @@ trait IsDataContainer
         }
     }
 
-    public function offsetExists($offset): bool
+    /**
+     * @param array-key $offset
+     */
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->data[$offset]);
     }
 
-    public function offsetUnset($offset): void
+    /**
+     * @param array-key $offset
+     */
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->data[$offset]);
     }
 
     /**
+     * @param array-key $offset
+     *
      * @throws \InvalidArgumentException
+     *
+     * @return TValue
      */
-    public function offsetGet($offset): mixed
+    public function offsetGet(mixed $offset): mixed
     {
         if (!\array_key_exists($offset, $this->data)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException("The {$offset} key does not exist in the container.");
         }
 
         return $this->data[$offset];

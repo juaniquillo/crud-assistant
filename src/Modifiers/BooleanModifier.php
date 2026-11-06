@@ -14,7 +14,7 @@ class BooleanModifier implements ModifierInterface
     ) {
     }
 
-    public function modify($value, $model = null)
+    public function modify(mixed $value, ?object $model = null): mixed
     {
         return $value ? $this->trueLabel : $this->falseLabel;
     }

@@ -6,30 +6,38 @@ namespace Juaniquillo\CrudAssistant\Contracts;
 
 /**
  * Input Collection Interface.
+ *
+ * @extends \IteratorAggregate<array-key, InputInterface>
  */
-interface InputCollectionInterface extends InputInterface
+interface InputCollectionInterface extends InputInterface, \IteratorAggregate
 {
-    public function setInputs(array $inputsArray);
+    /** @param array<int|string, InputInterface> $inputsArray */
+    public function setInputs(array $inputsArray): static;
 
-    public function addInput(InputInterface $input, ?string $key = null);
+    public function addInput(InputInterface $input, ?string $key = null): static;
 
-    public function removeInput(string $key);
+    public function removeInput(string $key): static;
 
-    public function setPartialCollection(array $partialCollection);
+    /** @param array<int|string, string> $partialCollection */
+    public function setPartialCollection(array $partialCollection): static;
 
-    public function getPartialCollection();
+    /** @return array<int|string, InputInterface> */
+    public function getPartialCollection(): array;
 
-    public function count();
+    public function count(): int;
 
-    public function isset(string $key);
+    public function has(string $key): bool;
 
-    public function getInput(string $key);
+    public function getInput(string $key): InputInterface;
 
-    public function getInputs(bool $all = false);
+    /** @return array<int|string, InputInterface> */
+    public function getInputs(bool $all = false): array;
 
-    public function getInputNames();
+    /** @return array<int|string, string|null> */
+    public function getInputNames(): array;
 
-    public function getInputLabels();
+    /** @return array<int|string, string|null> */
+    public function getInputLabels(): array;
 
-    public function executeAll(ActionInterface $action);
+    public function executeAll(ActionInterface $action): void;
 }

@@ -12,10 +12,4 @@ use Juaniquillo\CrudAssistant\Concerns\IsAction;
 abstract class Action
 {
     use IsAction;
-
-    protected $controlsRecursion = false;
-
-    protected $controlsExecution = false;
-
-    protected $processInternalCollection = false;
 }

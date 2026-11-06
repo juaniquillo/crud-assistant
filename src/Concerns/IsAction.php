@@ -11,9 +11,25 @@ use Juaniquillo\CrudAssistant\DataContainer;
 
 trait IsAction
 {
-    protected $output;
+    /** @var DataContainerInterface<mixed>|null */
+    protected ?DataContainerInterface $output = null;
 
-    public function initOutput()
+    /**
+     * See ActionInterface::controlsRecursion().
+     */
+    protected bool $controlsRecursion = false;
+
+    /**
+     * See ActionInterface::controlsExecution().
+     */
+    protected bool $controlsExecution = false;
+
+    /**
+     * See ActionInterface::processInternalCollection().
+     */
+    protected bool $processInternalCollection = false;
+
+    public function initOutput(): static
     {
         if (!$this->output) {
             $this->output = new DataContainer();
@@ -22,12 +38,12 @@ trait IsAction
         return $this;
     }
 
-    public static function getIdentifier()
+    public static function getIdentifier(): string
     {
         return static::class;
     }
 
-    public function setControlsRecursion(bool $controlsRecursion)
+    public function setControlsRecursion(bool $controlsRecursion): static
     {
         $this->controlsRecursion = $controlsRecursion;
 
@@ -51,36 +67,35 @@ trait IsAction
         return $this;
     }
 
-    public function controlsRecursion()
+    public function controlsRecursion(): bool
     {
-        return $this->controlsRecursion ?? false;
+        return $this->controlsRecursion;
     }
 
-    public function controlsExecution()
+    public function controlsExecution(): bool
     {
-        return $this->controlsExecution ?? false;
+        return $this->controlsExecution;
     }
 
-    public function processInternalCollection()
+    public function processInternalCollection(): bool
     {
-        return $this->processInternalCollection ?? false;
+        return $this->processInternalCollection;
     }
 
-    public function isEmpty($value)
+    public function isEmpty(mixed $value): bool
     {
         return $value === '' || $value === null;
     }
 
+    /** @return DataContainerInterface<mixed> */
     public function getOutput(): DataContainer|DataContainerInterface
     {
-        $this->initOutput();
-
-        return $this->output;
+        return $this->output ??= new DataContainer();
     }
 
-    protected function modifiers($value, InputInterface $input, $model = null)
+    protected function modifiers(mixed $value, InputInterface $input, ?object $model = null): mixed
     {
-        $recipe = $input->getRecipe(static::class);
+        $recipe = $input->getRecipe(static::getIdentifier());
 
         if (!$recipe) {
             return $value;
@@ -95,7 +110,7 @@ trait IsAction
         return $value;
     }
 
-    protected function executeModifier(ModifierInterface $modifier, $value, $model = null)
+    protected function executeModifier(ModifierInterface $modifier, mixed $value, ?object $model = null): mixed
     {
         return $modifier->modify($value, $model);
     }

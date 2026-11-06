@@ -7,11 +7,20 @@ namespace Juaniquillo\CrudAssistant\Containers;
 use Juaniquillo\CrudAssistant\Concerns\IsDataContainer;
 use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
 
-final class FilterContainer implements \ArrayAccess, \Countable, DataContainerInterface, \IteratorAggregate
+/**
+ * @template TValue
+ *
+ * @implements DataContainerInterface<TValue>
+ */
+final class FilterContainer implements DataContainerInterface
 {
+    /** @use IsDataContainer<TValue> */
     use IsDataContainer;
 
-    public static function make(array $data = []): DataContainerInterface
+    /**
+     * @param array<array-key, TValue> $data
+     */
+    public static function make(array $data = []): static
     {
         return new static($data);
     }

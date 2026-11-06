@@ -13,13 +13,21 @@ interface InputInterface
 
     public function setLabel(string $label): static;
 
-    public function setAttribute(string $name, $value): static;
+    /**
+     * Shared concerns only (e.g. rendering): attributes are visible to
+     * every action. Per-action config belongs in that action's Recipe.
+     */
+    public function setAttribute(string $name, int|string $value): static;
 
     public function setSubElements(InputCollectionInterface $subElements): static;
 
     public function setVersion(int $version): static;
 
     public function setType(string $type): static;
+
+    public function disablePrepare(): static;
+
+    public function disableCleanup(): static;
 
     public function getName(): ?string;
 
@@ -31,6 +39,12 @@ interface InputInterface
 
     public function getAttribute(string $name): mixed;
 
+    /**
+     * Shared concerns only (e.g. rendering): attributes are visible to
+     * every action. Per-action config belongs in that action's Recipe.
+     *
+     * @return array<string, int|string>
+     */
     public function getAttributes(): array;
 
     public function unsetAttribute(string $key): static;
@@ -49,7 +63,9 @@ interface InputInterface
 
     public function getRecipe(string $recipe): ?RecipeInterface;
 
+    /** @return array<int|string, RecipeInterface> */
     public function getRecipes(): array;
 
+    /** @return DataContainerInterface<mixed> */
     public function execute(ActionInterface $action): DataContainerInterface;
 }

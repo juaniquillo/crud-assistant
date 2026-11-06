@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class InputCollectionTest extends TestCase
 {
-    public function testACollectionCanHaveMultipleInputs()
+    public function testACollectionCanHaveMultipleInputs(): void
     {
         $form = new InputCollection();
 
@@ -26,7 +26,7 @@ class InputCollectionTest extends TestCase
         $this->assertEquals($form->count(), 2);
     }
 
-    public function testInputsCanBeAccessedUsingGetInput()
+    public function testInputsCanBeAccessedUsingGetInput(): void
     {
         $form = new InputCollection();
 
@@ -36,25 +36,25 @@ class InputCollectionTest extends TestCase
         $this->assertCount(1, $form->getInputs());
     }
 
-    public function testIssetCanBeUsedToCheckIfAnInputExists()
+    public function testHasCanBeUsedToCheckIfAnInputExists(): void
     {
         $form = new InputCollection();
 
         $form->addInput(new TextInput('name', 'Name'));
         $form->addInput(new TextInput('email', 'Email'));
 
-        $this->assertTrue($form->isset('name'));
-        $this->assertFalse($form->isset('does_no_exist'));
+        $this->assertTrue($form->has('name'));
+        $this->assertFalse($form->has('does_no_exist'));
     }
 
-    public function testAnExceptionIsThrownIfANonExistingInputIsAccessed()
+    public function testAnExceptionIsThrownIfANonExistingInputIsAccessed(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $form = new InputCollection();
         $form->getInput('name');
     }
 
-    public function testAnInputCanBeRemovedFromTheCollection()
+    public function testAnInputCanBeRemovedFromTheCollection(): void
     {
         $form = new InputCollection();
 
@@ -65,7 +65,7 @@ class InputCollectionTest extends TestCase
         $this->assertEquals(0, $form->count());
     }
 
-    public function testAnActionCanBeExecutedFromACollection()
+    public function testAnActionCanBeExecutedFromACollection(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -85,7 +85,7 @@ class InputCollectionTest extends TestCase
         $this->assertCount(2, $labelValue);
     }
 
-    public function testIfIgnoreIsSetOnTheRecipeOfAnInputThatInputWillNotBeSentToTheAction()
+    public function testIfIgnoreIsSetOnTheRecipeOfAnInputThatInputWillNotBeSentToTheAction(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -109,7 +109,7 @@ class InputCollectionTest extends TestCase
         $this->assertCount(1, $labelValue);
     }
 
-    public function testACollectionCanReturnAnArrayOfTheInputNames()
+    public function testACollectionCanReturnAnArrayOfTheInputNames(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -123,7 +123,7 @@ class InputCollectionTest extends TestCase
         $this->assertContains($email->getName(), $names);
     }
 
-    public function testACollectionCanReturnAnArrayOfTheInputLabels()
+    public function testACollectionCanReturnAnArrayOfTheInputLabels(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -137,7 +137,7 @@ class InputCollectionTest extends TestCase
         $this->assertContains($email->getLabel(), $labels);
     }
 
-    public function testAPartialInputCollectionCanBeCreated()
+    public function testAPartialInputCollectionCanBeCreated(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -153,7 +153,7 @@ class InputCollectionTest extends TestCase
         $this->assertCount(2, $form->getInputNames());
     }
 
-    public function testASubCollectionCanBeAccessedUsingGetPartialCollection()
+    public function testASubCollectionCanBeAccessedUsingGetPartialCollection(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -167,7 +167,7 @@ class InputCollectionTest extends TestCase
         $this->assertCount(2, $form->getPartialCollection());
     }
 
-    public function testIfAnEmptyArrayIsPassedWhenCreatingASubCollectionAnExceptionIsThrown()
+    public function testIfAnEmptyArrayIsPassedWhenCreatingASubCollectionAnExceptionIsThrown(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -183,7 +183,7 @@ class InputCollectionTest extends TestCase
         $form->setPartialCollection([]);
     }
 
-    public function testIfNoInputsHaveBeenSetAnExceptionIsThrownWhenTryingCreateAnSubCollection()
+    public function testIfNoInputsHaveBeenSetAnExceptionIsThrownWhenTryingCreateAnSubCollection(): void
     {
         $form = new InputCollection();
 
@@ -192,7 +192,7 @@ class InputCollectionTest extends TestCase
         $form->setPartialCollection(['name']);
     }
 
-    public function testIfAnInputIsRemovedFromTheCollectionItIsAlsoRemovedFromTheSubCollection()
+    public function testIfAnInputIsRemovedFromTheCollectionItIsAlsoRemovedFromTheSubCollection(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -212,7 +212,7 @@ class InputCollectionTest extends TestCase
         $this->assertCount(1, $form->getInputs());
     }
 
-    public function testTheInputCollectionIsIterable()
+    public function testTheInputCollectionIsIterable(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -226,7 +226,7 @@ class InputCollectionTest extends TestCase
         }
     }
 
-    public function testAnInputCollectionCanContainOtherInputCollection()
+    public function testAnInputCollectionCanContainOtherInputCollection(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -244,7 +244,7 @@ class InputCollectionTest extends TestCase
         $this->assertInstanceOf(InputCollection::class, $form->getInput('secondary_info'));
     }
 
-    public function testIfProcessInternalCollectionIsTrueTheInternalCollectionIsProcessedLikeANormalInput()
+    public function testIfProcessInternalCollectionIsTrueTheInternalCollectionIsProcessedLikeANormalInput(): void
     {
         $name = new TextInput('name', 'Name');
         $email = new TextInput('email', 'Email');
@@ -282,7 +282,7 @@ class InputCollectionTest extends TestCase
         $this->assertCount(5, $output2);
     }
 
-    public function testThePrepareAndCleanupExecutionCanBeDisabled()
+    public function testThePrepareAndCleanupExecutionCanBeDisabled(): void
     {
         $collection = new InputCollection('collection_1');
         $collection

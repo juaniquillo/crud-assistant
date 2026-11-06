@@ -21,14 +21,21 @@ abstract class Input implements InputInterface
 
     protected ?int $version = 1;
 
+    /** @var array<string, int|string> */
     protected array $attributes = [];
 
     protected ?InputCollectionInterface $subElements = null;
 
     protected ?string $type = null;
 
+    protected bool $prepare = true;
+
+    protected bool $cleanup = true;
+
+    /** @var array<int|string, RecipeInterface> */
     protected array $recipes = [];
 
+    /** @var array<int|string, class-string<ActionInterface>> */
     protected array $onlyFor = [];
 
     public function __construct(?string $name = null, ?string $label = null)
@@ -51,7 +58,7 @@ abstract class Input implements InputInterface
         return $this;
     }
 
-    public function setAttribute(string $name, $value): static
+    public function setAttribute(string $name, int|string $value): static
     {
         $this->attributes[$name] = $value;
 
@@ -75,6 +82,20 @@ abstract class Input implements InputInterface
     public function setType(string $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function disablePrepare(): static
+    {
+        $this->prepare = false;
+
+        return $this;
+    }
+
+    public function disableCleanup(): static
+    {
+        $this->cleanup = false;
 
         return $this;
     }
@@ -108,6 +129,7 @@ abstract class Input implements InputInterface
         return null;
     }
 
+    /** @return array<string, int|string> */
     public function getAttributes(): array
     {
         return $this->attributes;
@@ -122,6 +144,7 @@ abstract class Input implements InputInterface
         return $this;
     }
 
+    /** @param array<int|string, class-string<ActionInterface>> $actions */
     public function onlyFor(array $actions): static
     {
         $this->onlyFor = $actions;
@@ -129,6 +152,7 @@ abstract class Input implements InputInterface
         return $this;
     }
 
+    /** @return array<int|string, class-string<ActionInterface>> */
     public function getOnlyFor(): array
     {
         return $this->onlyFor;
@@ -164,13 +188,17 @@ abstract class Input implements InputInterface
         return null;
     }
 
+    /** @return array<int|string, RecipeInterface> */
     public function getRecipes(): array
     {
         return $this->recipes;
     }
 
+    /** @return DataContainerInterface<mixed> */
     public function execute(ActionInterface $action): DataContainerInterface
     {
-        return $action->execute($this);
+        $action->execute($this);
+
+        return $action->getOutput();
     }
 }

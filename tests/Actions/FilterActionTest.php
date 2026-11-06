@@ -13,14 +13,14 @@ use PHPUnit\Framework\TestCase;
 
 class FilterActionTest extends TestCase
 {
-    public function testMakeCanBeUsedToGetAnInstanceOfFilterAction()
+    public function testMakeCanBeUsedToGetAnInstanceOfFilterAction(): void
     {
         $recipe = FilterAction::make();
 
         $this->assertInstanceOf(FilterAction::class, $recipe);
     }
 
-    public function testAFilterActionIsUsedToExcludeInputDataFromDataset()
+    public function testAFilterActionIsUsedToExcludeInputDataFromDataset(): void
     {
         $filter = new FilterAction();
 
@@ -48,7 +48,7 @@ class FilterActionTest extends TestCase
         $this->assertFalse(isset($filtered->data[$email->getName()]));
     }
 
-    public function testAnInternalInputCollectionCanBeUsedOnTheFilterActionForOrganizationPurposes()
+    public function testAnInternalInputCollectionCanBeUsedOnTheFilterActionForOrganizationPurposes(): void
     {
         $filter = new FilterAction();
 
@@ -86,7 +86,7 @@ class FilterActionTest extends TestCase
         $this->assertCount(3, $filtered->data);
     }
 
-    public function testAClosureCanBePassedAsAValueInsteadOfAnArrayToTheFilterAction()
+    public function testAClosureCanBePassedAsAValueInsteadOfAnArrayToTheFilterAction(): void
     {
         $name = new TextInput('name', 'Name');
 
@@ -112,7 +112,7 @@ class FilterActionTest extends TestCase
 
         $filter->prepare();
         foreach ($inputs as $input) {
-            $filter->executeOne($input);
+            $filter->execute($input);
         }
         $filtered = $filter->getOutput();
 
@@ -120,7 +120,7 @@ class FilterActionTest extends TestCase
         $this->assertFalse(isset($filtered->data[$email->getName()]));
     }
 
-    public function testIfIgnoreIfEmptyIsPassedToTheFilterActionThatItemIsAlsoFiltered()
+    public function testIfIgnoreIfEmptyIsPassedToTheFilterActionThatItemIsAlsoFiltered(): void
     {
         $name = new TextInput('name', 'Name');
 
@@ -142,10 +142,29 @@ class FilterActionTest extends TestCase
 
         $filter->prepare();
         foreach ($inputs as $input) {
-            $filter->executeOne($input);
+            $filter->execute($input);
         }
         $filtered = $filter->getOutput();
 
         $this->assertCount(2, $filtered->data);
+    }
+
+    public function testExecuteCanBeCalledWithASingleInput(): void
+    {
+        $email = new TextInput('email', 'Email');
+        $email->setRecipe(new FilterRecipe(true));
+
+        $filter = new FilterAction([
+            'name' => 'Victor Sánchez',
+            'email' => 'email@email.com',
+        ]);
+
+        $filter->prepare();
+        $filter->execute($email);
+
+        $filtered = $filter->getOutput();
+
+        $this->assertCount(1, $filtered->get('data'));
+        $this->assertArrayNotHasKey('email', $filtered->get('data'));
     }
 }

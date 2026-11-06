@@ -9,22 +9,24 @@ use Juaniquillo\CrudAssistant\Containers\FilterContainer;
 use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputInterface;
-use Juaniquillo\CrudAssistant\CrudAssistant;
+use Juaniquillo\CrudAssistant\Support\InputHelper;
 
 /**
  * Filter action.
  */
 final class FilterAction extends Action implements ActionInterface
 {
-    protected $controlsExecution = true;
+    protected bool $controlsExecution = true;
 
-    protected $controlsRecursion = true;
+    protected bool $controlsRecursion = true;
 
+    /** @param array<int|string, mixed> $data */
     public function __construct(private array $data = [])
     {
         $this->output = new FilterContainer();
     }
 
+    /** @param array<int|string, mixed> $data */
     public static function make(array $data = []): self
     {
         return new self($data);
@@ -32,30 +34,37 @@ final class FilterAction extends Action implements ActionInterface
 
     public function prepare(): static
     {
-        $this->output->data = $this->data;
+        $this->getOutput()->set('data', $this->data);
 
         return $this;
     }
 
-    public function execute(InputCollectionInterface|InputInterface|\IteratorAggregate $input)
+    public function execute(InputCollectionInterface|InputInterface $input): void
     {
-        foreach ($input as $val) {
+        $inputs = InputHelper::isCollection($input) ? $input : [$input];
+
+        foreach ($inputs as $val) {
             $this->executeOne($val);
         }
-
-        return $this->output;
     }
 
-    public function executeOne(InputCollectionInterface|InputInterface|\IteratorAggregate $input)
+    /**
+     * Run the action against a single input. Collections are recursed
+     * into when controlsRecursion() is true.
+     */
+    private function executeOne(InputCollectionInterface|InputInterface $input): void
     {
-        if (CrudAssistant::isInputCollection($input) && $this->controlsRecursion) {
+        $output = $this->getOutput();
+
+        if (InputHelper::isCollection($input) && $this->controlsRecursion) {
             foreach ($input as $val) {
                 $this->executeOne($val);
             }
+
+            return;
         }
 
-        $output = $this->output;
-        $data = $output->data;
+        $data = $output->get('data');
 
         $name = $input->getName();
         $recipe = $input->getRecipe($this->getIdentifier());
@@ -73,8 +82,6 @@ final class FilterAction extends Action implements ActionInterface
             unset($data[$name]);
         }
 
-        $output->data = $data;
-
-        return $output;
+        $output->set('data', $data);
     }
 }

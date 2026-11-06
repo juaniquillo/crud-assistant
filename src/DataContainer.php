@@ -9,13 +9,20 @@ use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
 
 /**
  * DataContainer.
+ *
+ * @template TValue
+ *
+ * @implements DataContainerInterface<TValue>
  */
-#[\AllowDynamicProperties]
-final class DataContainer implements DataContainerInterface, \IteratorAggregate, \Countable, \ArrayAccess
+final class DataContainer implements DataContainerInterface
 {
+    /** @use IsDataContainer<TValue> */
     use IsDataContainer;
 
-    public static function make(array $data = []): DataContainerInterface
+    /**
+     * @param array<array-key, TValue> $data
+     */
+    public static function make(array $data = []): static
     {
         return new static($data);
     }

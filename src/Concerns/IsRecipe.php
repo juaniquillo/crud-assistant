@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Concerns;
 
+use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
 use Juaniquillo\CrudAssistant\Contracts\ModifierInterface;
 
 /**
@@ -11,36 +12,41 @@ use Juaniquillo\CrudAssistant\Contracts\ModifierInterface;
  */
 trait IsRecipe
 {
-    // protected ?string $action = null;
+    /** @var class-string<ActionInterface>|null */
+    protected ?string $action = null;
 
-    protected $ignored = false;
+    protected bool $ignored = false;
 
-    protected $modifiers = [];
+    /** @var array<int, ModifierInterface> */
+    protected array $modifiers = [];
 
     public function getIdentifier(): string
     {
         if (isset($this->action)) {
-            return ($this->action)::getIdentifier();
+            $action = $this->action;
+
+            return $action::getIdentifier();
         }
 
         return static::class;
     }
 
-    public function ignore($ignore = true)
+    public function ignore(bool $ignore = true): static
     {
         $this->ignored = $ignore;
 
         return $this;
     }
 
-    public function setModifier(ModifierInterface $modifier)
+    public function setModifier(ModifierInterface $modifier): static
     {
         $this->modifiers[] = $modifier;
 
         return $this;
     }
 
-    public function setModifiers(array $modifiers)
+    /** @param array<int, ModifierInterface> $modifiers */
+    public function setModifiers(array $modifiers): static
     {
         foreach ($modifiers as $modifier) {
             $this->setModifier($modifier);
@@ -49,17 +55,18 @@ trait IsRecipe
         return $this;
     }
 
-    public function getModifiers()
+    /** @return array<int, ModifierInterface> */
+    public function getModifiers(): array
     {
         return $this->modifiers;
     }
 
-    public function hasModifiers()
+    public function hasModifiers(): bool
     {
         return (bool) \count($this->getModifiers());
     }
 
-    public function isIgnored()
+    public function isIgnored(): bool
     {
         return $this->ignored;
     }
