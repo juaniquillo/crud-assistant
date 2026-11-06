@@ -35,7 +35,7 @@ final class FilterAction extends Action implements ActionInterface
 
     public function prepare(): static
     {
-        $this->output->fill($this->data);
+        $this->output->set('data', $this->data);
 
         return $this;
     }

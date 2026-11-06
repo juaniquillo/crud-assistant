@@ -138,6 +138,8 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
     {
         if ($action->controlsExecution()) {
             $this->executeAll($action);
+
+            return $action->getOutput();
         }
 
         if ($this->prepare) {
