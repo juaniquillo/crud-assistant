@@ -32,7 +32,7 @@ trait IsDataContainer
     public function __get(string $name): mixed
     {
         if (!\array_key_exists($name, $this->data)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException("The {$name} key does not exist in the container.");
         }
 
         return $this->data[$name];
@@ -70,8 +70,8 @@ trait IsDataContainer
      */
     public function get(mixed $name): mixed
     {
-        if (!isset($this->data[$name])) {
-            throw new \InvalidArgumentException();
+        if (!\array_key_exists($name, $this->data)) {
+            throw new \InvalidArgumentException("The {$name} key does not exist in the container.");
         }
 
         return $this->data[$name];
@@ -124,7 +124,7 @@ trait IsDataContainer
     public function contains(array $keys): bool
     {
         foreach ($keys as $key) {
-            if (!isset($this->data[$key])) {
+            if (!\array_key_exists($key, $this->data)) {
                 return false;
             }
         }
@@ -139,7 +139,7 @@ trait IsDataContainer
     public function missing(array $keys): mixed
     {
         foreach ($keys as $key) {
-            if (!isset($this->data[$key])) {
+            if (!\array_key_exists($key, $this->data)) {
                 return $key;
             }
         }
@@ -213,7 +213,7 @@ trait IsDataContainer
     public function offsetGet(mixed $offset): mixed
     {
         if (!\array_key_exists($offset, $this->data)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException("The {$offset} key does not exist in the container.");
         }
 
         return $this->data[$offset];
