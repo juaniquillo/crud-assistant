@@ -26,8 +26,8 @@
 - ✅ Change modifiers' method definition
 - ✅ Add `push` method to `DataContainer`
 - ✅ Implement ignore on the `InputCollection`'s execute method
-- ⬜️ Implement history in modifiers
-- ⬜️ Change `DataContainer`'s `add` method to `merge`
-- ⬜️ Test in lower php versions
-- ⬜️ Package cleanup
-- ⬜️ Redo Readme
+- ⬜️ Implement history in modifiers (deferred: never scoped, not in 0.3.0)
+- ✅ Change `DataContainer`'s `add` method to `merge`
+- ✅ Test in lower php versions (CI matrix: 8.3, 8.4)
+- ✅ Package cleanup (dead classes/helpers removed, generics, contracts)
+- ✅ Redo Readme (plus `docs/`, `UPGRADE.md`, `SKILL.md`, `CHANGELOG.md`)
