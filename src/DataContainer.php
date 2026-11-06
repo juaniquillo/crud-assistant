@@ -16,7 +16,6 @@ use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
  * @implements \ArrayAccess<TKey, TValue>
  * @implements \IteratorAggregate<TKey, TValue>
  */
-#[\AllowDynamicProperties]
 final class DataContainer implements DataContainerInterface, \IteratorAggregate, \Countable, \ArrayAccess
 {
     /** @use IsDataContainer<TKey, TValue> */
