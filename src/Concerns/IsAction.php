@@ -95,7 +95,7 @@ trait IsAction
 
     protected function modifiers(mixed $value, InputInterface $input, ?object $model = null): mixed
     {
-        $recipe = $input->getRecipe(static::class);
+        $recipe = $input->getRecipe(static::getIdentifier());
 
         if (!$recipe) {
             return $value;

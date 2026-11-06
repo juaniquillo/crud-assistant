@@ -37,7 +37,7 @@ class InputTest extends TestCase
         $input->setType('email');
         $input->setRecipe(new LabelValueRecipe($value['label']));
 
-        $this->assertEquals($input->getRecipe(LabelValueAction::class)->label, $value['label']);
+        $this->assertEquals($input->getRecipe(LabelValueAction::getIdentifier())->label, $value['label']);
     }
 
     public function testIfRecipeDoesNotExistInClassNullIsReturned(): void
@@ -45,7 +45,7 @@ class InputTest extends TestCase
         $input = new TextInput('email', 'Email');
         $input->setType('email');
 
-        $this->assertNull($input->getRecipe(LabelValueAction::class));
+        $this->assertNull($input->getRecipe(LabelValueAction::getIdentifier()));
     }
 
     public function testTheNameLabelVersionAndTypeCanBeSetAfterTheInputHasBeenInstantiated(): void
