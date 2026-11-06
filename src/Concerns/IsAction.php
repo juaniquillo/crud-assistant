@@ -11,6 +11,7 @@ use Juaniquillo\CrudAssistant\DataContainer;
 
 trait IsAction
 {
+    /** @var DataContainerInterface<array-key, mixed>|null */
     protected ?DataContainerInterface $output = null;
 
     protected bool $controlsRecursion = false;
@@ -77,6 +78,7 @@ trait IsAction
         return $value === '' || $value === null;
     }
 
+    /** @return DataContainerInterface<array-key, mixed> */
     public function getOutput(): DataContainer|DataContainerInterface
     {
         $this->initOutput();

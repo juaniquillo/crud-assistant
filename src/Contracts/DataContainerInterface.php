@@ -4,29 +4,49 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Contracts;
 
-interface DataContainerInterface
+/**
+ * @template TKey of array-key
+ * @template TValue
+ *
+ * @extends \IteratorAggregate<TKey, TValue>
+ * @extends \ArrayAccess<TKey, TValue>
+ */
+interface DataContainerInterface extends \IteratorAggregate, \Countable, \ArrayAccess
 {
-    public function get(string $name): mixed;
+    /**
+     * @param TKey $name
+     * @return TValue
+     * @throws \InvalidArgumentException
+     */
+    public function get(mixed $name): mixed;
 
-    public function set(string $name, mixed $value): static;
+    /**
+     * @param TKey $name
+     * @param TValue $value
+     */
+    public function set(mixed $name, mixed $value): static;
 
-    /** @param array<array-key, mixed> $data */
+    /** @param array<TKey, TValue> $data */
     public function fill(array $data): static;
 
-    /** @param array<array-key, mixed> $data */
+    /** @param array<TKey, TValue> $data */
     public function merge(array $data): static;
 
+    /** @param TValue $value */
     public function push(mixed $value): static;
-    
-    /** @param array<array-key, mixed> $keys */
+
+    /** @param array<int, TKey> $keys */
     public function contains(array $keys): bool;
 
-    /** @param array<array-key, mixed> $keys */
+    /**
+     * @param array<int, TKey> $keys
+     * @return TKey|false
+     */
     public function missing(array $keys): mixed;
 
-    /** @return array<array-key, mixed> */
+    /** @return array<TKey, TValue> */
     public function toArray(): array;
 
-    /** @return array<array-key, mixed> */
+    /** @return array<TKey, TValue> */
     public function all(): array;
 }

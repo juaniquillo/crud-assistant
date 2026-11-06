@@ -104,6 +104,17 @@ class DataContainerTest extends TestCase
         $this->assertEquals('new', $container->missing(array_keys($values)));
     }
 
+    public function testNullValuesAreTreatedAsExistingKeys()
+    {
+        $container = new DataContainer(['name' => null]);
+
+        $this->assertNull($container->get('name'));
+        $this->assertNull($container->name);
+        $this->assertNull($container['name']);
+        $this->assertTrue($container->contains(['name']));
+        $this->assertFalse($container->missing(['name']));
+    }
+
     public function testAllValuesCanBeAccessUsingTheAllMethod()
     {
         $container = new DataContainer();

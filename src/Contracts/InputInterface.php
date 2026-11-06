@@ -57,5 +57,6 @@ interface InputInterface
     /** @return array<int|string, RecipeInterface> */
     public function getRecipes(): array;
 
+    /** @return DataContainerInterface<array-key, mixed> */
     public function execute(ActionInterface $action): DataContainerInterface;
 }

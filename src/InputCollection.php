@@ -135,6 +135,7 @@ class InputCollection extends Input implements InputInterface, InputCollectionIn
         return $labels;
     }
 
+    /** @return DataContainerInterface<array-key, mixed> */
     public function execute(ActionInterface $action): DataContainerInterface
     {
         if ($action->controlsExecution()) {

@@ -29,5 +29,6 @@ interface ActionInterface
 
     public function processInternalCollection(): bool;
 
+    /** @return DataContainerInterface<array-key, mixed> */
     public function getOutput(): DataContainerInterface;
 }

@@ -13,10 +13,9 @@ use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
  * @template TKey of array-key
  * @template TValue
  *
- * @implements \ArrayAccess<TKey, TValue>
- * @implements \IteratorAggregate<TKey, TValue>
+ * @implements DataContainerInterface<TKey, TValue>
  */
-final class DataContainer implements DataContainerInterface, \IteratorAggregate, \Countable, \ArrayAccess
+final class DataContainer implements DataContainerInterface
 {
     /** @use IsDataContainer<TKey, TValue> */
     use IsDataContainer;
@@ -24,7 +23,7 @@ final class DataContainer implements DataContainerInterface, \IteratorAggregate,
     /**
      * @param array<TKey, TValue> $data
      */
-    public static function make(array $data = []): DataContainerInterface
+    public static function make(array $data = []): static
     {
         return new static($data);
     }

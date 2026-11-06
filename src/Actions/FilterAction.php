@@ -47,6 +47,7 @@ final class FilterAction extends Action implements ActionInterface
         }
     }
 
+    /** @return DataContainerInterface<array-key, mixed> */
     public function executeOne(InputCollectionInterface|InputInterface|\IteratorAggregate $input): DataContainerInterface
     {
         if (InputHelper::isCollection($input) && $this->controlsRecursion) {
