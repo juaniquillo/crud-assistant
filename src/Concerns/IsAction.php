@@ -11,7 +11,7 @@ use Juaniquillo\CrudAssistant\DataContainer;
 
 trait IsAction
 {
-    /** @var DataContainerInterface<array-key, mixed>|null */
+    /** @var DataContainerInterface<mixed>|null */
     protected ?DataContainerInterface $output = null;
 
     /**
@@ -87,12 +87,10 @@ trait IsAction
         return $value === '' || $value === null;
     }
 
-    /** @return DataContainerInterface<array-key, mixed> */
+    /** @return DataContainerInterface<mixed> */
     public function getOutput(): DataContainer|DataContainerInterface
     {
-        $this->initOutput();
-
-        return $this->output;
+        return $this->output ??= new DataContainer();
     }
 
     protected function modifiers(mixed $value, InputInterface $input, ?object $model = null): mixed

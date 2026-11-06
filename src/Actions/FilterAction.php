@@ -34,7 +34,7 @@ final class FilterAction extends Action implements ActionInterface
 
     public function prepare(): static
     {
-        $this->output->set('data', $this->data);
+        $this->getOutput()->set('data', $this->data);
 
         return $this;
     }
@@ -54,7 +54,7 @@ final class FilterAction extends Action implements ActionInterface
      */
     private function executeOne(InputCollectionInterface|InputInterface $input): void
     {
-        $output = $this->output;
+        $output = $this->getOutput();
 
         if (InputHelper::isCollection($input) && $this->controlsRecursion) {
             foreach ($input as $val) {
