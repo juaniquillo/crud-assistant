@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace Juaniquillo\CrudAssistant\Concerns;
 
 /**
- * @template TKey of array-key
  * @template TValue
  */
 trait IsDataContainer
 {
     /**
-     * Bind the internal array to the template types.
+     * Bind the internal array to the template type.
      *
-     * @var array<TKey, TValue>
+     * @var array<array-key, TValue>
      */
     protected array $data = [];
 
     /**
-     * @param array<TKey, TValue> $data
+     * @param array<array-key, TValue> $data
      */
     public function __construct(array $data = [])
     {
@@ -44,8 +43,6 @@ trait IsDataContainer
      */
     public function __set(string $name, mixed $value): void
     {
-        // @var TKey $name
-        // @phpstan-ignore varTag.nativeType
         $this->data[$name] = $value;
     }
 
@@ -65,7 +62,7 @@ trait IsDataContainer
     }
 
     /**
-     * @param TKey $name
+     * @param array-key $name
      *
      * @throws \InvalidArgumentException
      *
@@ -81,8 +78,8 @@ trait IsDataContainer
     }
 
     /**
-     * @param TKey   $name
-     * @param TValue $value
+     * @param array-key $name
+     * @param TValue    $value
      */
     public function set(mixed $name, mixed $value): static
     {
@@ -92,7 +89,7 @@ trait IsDataContainer
     }
 
     /**
-     * @param array<TKey, TValue> $data
+     * @param array<array-key, TValue> $data
      */
     public function fill(array $data): static
     {
@@ -102,7 +99,7 @@ trait IsDataContainer
     }
 
     /**
-     * @param array<TKey, TValue> $data
+     * @param array<array-key, TValue> $data
      */
     public function merge(array $data): static
     {
@@ -122,7 +119,7 @@ trait IsDataContainer
     }
 
     /**
-     * @param array<int, TKey> $keys
+     * @param array<int, array-key> $keys
      */
     public function contains(array $keys): bool
     {
@@ -136,9 +133,9 @@ trait IsDataContainer
     }
 
     /**
-     * @param array<int, TKey> $keys
+     * @param array<int, array-key> $keys
      *
-     * @return false|TKey
+     * @return array-key|false
      */
     public function missing(array $keys): mixed
     {
@@ -152,7 +149,7 @@ trait IsDataContainer
     }
 
     /**
-     * @return array<TKey, TValue>
+     * @return array<array-key, TValue>
      */
     public function toArray(): array
     {
@@ -160,7 +157,7 @@ trait IsDataContainer
     }
 
     /**
-     * @return array<TKey, TValue>
+     * @return array<array-key, TValue>
      */
     public function all(): array
     {
@@ -168,7 +165,7 @@ trait IsDataContainer
     }
 
     /**
-     * @return \ArrayIterator<TKey, TValue>
+     * @return \ArrayIterator<array-key, TValue>
      */
     public function getIterator(): \ArrayIterator
     {
@@ -181,8 +178,8 @@ trait IsDataContainer
     }
 
     /**
-     * @param TKey|null $offset
-     * @param TValue    $value
+     * @param array-key|null $offset
+     * @param TValue         $value
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
@@ -194,7 +191,7 @@ trait IsDataContainer
     }
 
     /**
-     * @param TKey $offset
+     * @param array-key $offset
      */
     public function offsetExists(mixed $offset): bool
     {
@@ -202,7 +199,7 @@ trait IsDataContainer
     }
 
     /**
-     * @param TKey $offset
+     * @param array-key $offset
      */
     public function offsetUnset(mixed $offset): void
     {
@@ -210,7 +207,7 @@ trait IsDataContainer
     }
 
     /**
-     * @param TKey $offset
+     * @param array-key $offset
      *
      * @throws \InvalidArgumentException
      *

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Concerns;
 
+use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
 use Juaniquillo\CrudAssistant\Contracts\ModifierInterface;
 
 /**
@@ -11,7 +12,8 @@ use Juaniquillo\CrudAssistant\Contracts\ModifierInterface;
  */
 trait IsRecipe
 {
-    // protected ?string $action = null;
+    /** @var class-string<ActionInterface>|null */
+    protected ?string $action = null;
 
     protected bool $ignored = false;
 
@@ -20,8 +22,9 @@ trait IsRecipe
 
     public function getIdentifier(): string
     {
-        $action = $this->action ?? null;
         if (isset($this->action)) {
+            $action = $this->action;
+
             return $action::getIdentifier();
         }
 

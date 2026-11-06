@@ -194,7 +194,7 @@ abstract class Input implements InputInterface
         return $this->recipes;
     }
 
-    /** @return DataContainerInterface<array-key, mixed> */
+    /** @return DataContainerInterface<mixed> */
     public function execute(ActionInterface $action): DataContainerInterface
     {
         $action->execute($this);

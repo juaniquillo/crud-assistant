@@ -8,18 +8,17 @@ use Juaniquillo\CrudAssistant\Concerns\IsDataContainer;
 use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
 
 /**
- * @template TKey of array-key
  * @template TValue
  *
- * @implements DataContainerInterface<TKey, TValue>
+ * @implements DataContainerInterface<TValue>
  */
 final class FilterContainer implements DataContainerInterface
 {
-    /** @use IsDataContainer<TKey, TValue> */
+    /** @use IsDataContainer<TValue> */
     use IsDataContainer;
 
     /**
-     * @param array<TKey, TValue> $data
+     * @param array<array-key, TValue> $data
      */
     public static function make(array $data = []): static
     {

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Contracts;
 
-use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
-use Juaniquillo\CrudAssistant\Contracts\InputInterface;
-
 /**
  * Action Interface.
  */
@@ -47,6 +44,6 @@ interface ActionInterface
      */
     public function processInternalCollection(): bool;
 
-    /** @return DataContainerInterface<array-key, mixed> */
+    /** @return DataContainerInterface<mixed> */
     public function getOutput(): DataContainerInterface;
 }

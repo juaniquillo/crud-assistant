@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace Juaniquillo\CrudAssistant\Contracts;
 
 /**
- * @template TKey of array-key
  * @template TValue
  *
- * @extends \IteratorAggregate<TKey, TValue>
- * @extends \ArrayAccess<TKey, TValue>
+ * @extends \IteratorAggregate<array-key, TValue>
+ * @extends \ArrayAccess<array-key, TValue>
  */
 interface DataContainerInterface extends \IteratorAggregate, \Countable, \ArrayAccess
 {
     /**
-     * @param TKey $name
+     * @param array-key $name
      *
      * @throws \InvalidArgumentException
      *
@@ -23,33 +22,33 @@ interface DataContainerInterface extends \IteratorAggregate, \Countable, \ArrayA
     public function get(mixed $name): mixed;
 
     /**
-     * @param TKey   $name
-     * @param TValue $value
+     * @param array-key $name
+     * @param TValue    $value
      */
     public function set(mixed $name, mixed $value): static;
 
-    /** @param array<TKey, TValue> $data */
+    /** @param array<array-key, TValue> $data */
     public function fill(array $data): static;
 
-    /** @param array<TKey, TValue> $data */
+    /** @param array<array-key, TValue> $data */
     public function merge(array $data): static;
 
     /** @param TValue $value */
     public function push(mixed $value): static;
 
-    /** @param array<int, TKey> $keys */
+    /** @param array<int, array-key> $keys */
     public function contains(array $keys): bool;
 
     /**
-     * @param array<int, TKey> $keys
+     * @param array<int, array-key> $keys
      *
-     * @return false|TKey
+     * @return array-key|false
      */
     public function missing(array $keys): mixed;
 
-    /** @return array<TKey, TValue> */
+    /** @return array<array-key, TValue> */
     public function toArray(): array;
 
-    /** @return array<TKey, TValue> */
+    /** @return array<array-key, TValue> */
     public function all(): array;
 }
