@@ -14,10 +14,19 @@ trait IsAction
     /** @var DataContainerInterface<array-key, mixed>|null */
     protected ?DataContainerInterface $output = null;
 
+    /**
+     * See ActionInterface::controlsRecursion().
+     */
     protected bool $controlsRecursion = false;
 
+    /**
+     * See ActionInterface::controlsExecution().
+     */
     protected bool $controlsExecution = false;
 
+    /**
+     * See ActionInterface::processInternalCollection().
+     */
     protected bool $processInternalCollection = false;
 
     public function initOutput(): static
@@ -73,7 +82,7 @@ trait IsAction
         return $this->processInternalCollection;
     }
 
-    public function isEmpty(mixed $value): mixed
+    public function isEmpty(mixed $value): bool
     {
         return $value === '' || $value === null;
     }

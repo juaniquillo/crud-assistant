@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Juaniquillo\CrudAssistant\Contracts;
 
-use Juaniquillo\CrudAssistant\InputCollection;
+use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
+use Juaniquillo\CrudAssistant\Contracts\InputInterface;
 
 /**
  * Action Interface.
@@ -19,14 +20,31 @@ interface ActionInterface
 
     public function prepare(): static;
 
-    public function execute(InputCollection|InputInterface|\IteratorAggregate $input): void;
+    /**
+     * Run the action against a single input or a collection of inputs.
+     */
+    public function execute(InputCollectionInterface|InputInterface $input): void;
 
     public function cleanup(): static;
 
-    public function controlsRecursion(): bool;
-
+    /**
+     * When true, the action drives iteration itself via executeAll().
+     * InputCollection::execute() runs executeAll() and returns early
+     * without its own per-input loop.
+     */
     public function controlsExecution(): bool;
 
+    /**
+     * When true, nested collections are handed to the action as a whole
+     * ($action->execute($collection)) so it can recurse internally
+     * instead of InputCollection iterating the members.
+     */
+    public function controlsRecursion(): bool;
+
+    /**
+     * When true, InputCollection additionally runs the action against a
+     * nested collection itself after running it against each member.
+     */
     public function processInternalCollection(): bool;
 
     /** @return DataContainerInterface<array-key, mixed> */

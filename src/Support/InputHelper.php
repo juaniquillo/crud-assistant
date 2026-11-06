@@ -12,6 +12,9 @@ use Juaniquillo\CrudAssistant\Contracts\InputInterface;
  */
 final class InputHelper
 {
+    /**
+     * @phpstan-assert-if-true InputCollectionInterface $input
+     */
     public static function isCollection(InputInterface $input): bool
     {
         return $input instanceof InputCollectionInterface;

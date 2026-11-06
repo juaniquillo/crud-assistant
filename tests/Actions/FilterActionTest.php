@@ -112,7 +112,7 @@ class FilterActionTest extends TestCase
 
         $filter->prepare();
         foreach ($inputs as $input) {
-            $filter->executeOne($input);
+            $filter->execute($input);
         }
         $filtered = $filter->getOutput();
 
@@ -142,10 +142,29 @@ class FilterActionTest extends TestCase
 
         $filter->prepare();
         foreach ($inputs as $input) {
-            $filter->executeOne($input);
+            $filter->execute($input);
         }
         $filtered = $filter->getOutput();
 
         $this->assertCount(2, $filtered->data);
+    }
+
+    public function testExecuteCanBeCalledWithASingleInput(): void
+    {
+        $email = new TextInput('email', 'Email');
+        $email->setRecipe(new FilterRecipe(true));
+
+        $filter = new FilterAction([
+            'name' => 'Victor Sánchez',
+            'email' => 'email@email.com',
+        ]);
+
+        $filter->prepare();
+        $filter->execute($email);
+
+        $filtered = $filter->getOutput();
+
+        $this->assertCount(1, $filtered->get('data'));
+        $this->assertArrayNotHasKey('email', $filtered->get('data'));
     }
 }

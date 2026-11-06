@@ -7,7 +7,6 @@ namespace Juaniquillo\CrudAssistant\Actions;
 use Juaniquillo\CrudAssistant\Action;
 use Juaniquillo\CrudAssistant\Containers\FilterContainer;
 use Juaniquillo\CrudAssistant\Contracts\ActionInterface;
-use Juaniquillo\CrudAssistant\Contracts\DataContainerInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputCollectionInterface;
 use Juaniquillo\CrudAssistant\Contracts\InputInterface;
 use Juaniquillo\CrudAssistant\Support\InputHelper;
@@ -40,23 +39,31 @@ final class FilterAction extends Action implements ActionInterface
         return $this;
     }
 
-    public function execute(InputCollectionInterface|InputInterface|\IteratorAggregate $input): void
+    public function execute(InputCollectionInterface|InputInterface $input): void
     {
-        foreach ($input as $val) {
+        $inputs = InputHelper::isCollection($input) ? $input : [$input];
+
+        foreach ($inputs as $val) {
             $this->executeOne($val);
         }
     }
 
-    /** @return DataContainerInterface<array-key, mixed> */
-    public function executeOne(InputCollectionInterface|InputInterface|\IteratorAggregate $input): DataContainerInterface
+    /**
+     * Run the action against a single input. Collections are recursed
+     * into when controlsRecursion() is true.
+     */
+    private function executeOne(InputCollectionInterface|InputInterface $input): void
     {
+        $output = $this->output;
+
         if (InputHelper::isCollection($input) && $this->controlsRecursion) {
             foreach ($input as $val) {
                 $this->executeOne($val);
             }
+
+            return;
         }
 
-        $output = $this->output;
         $data = $output->get('data');
 
         $name = $input->getName();
@@ -76,7 +83,5 @@ final class FilterAction extends Action implements ActionInterface
         }
 
         $output->set('data', $data);
-
-        return $output;
     }
 }

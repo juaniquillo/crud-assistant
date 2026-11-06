@@ -20,7 +20,7 @@ class PrepareCleanupAction extends Action implements ActionInterface
         return parent::prepare();
     }
 
-    public function execute(InputCollectionInterface|InputInterface|\IteratorAggregate $input): void
+    public function execute(InputCollectionInterface|InputInterface $input): void
     {
         $output = $this->getOutput();
 

@@ -34,7 +34,7 @@ final class LabelValueAction extends Action implements ActionInterface
         return parent::prepare();
     }
 
-    public function execute(InputCollectionInterface|InputInterface|\IteratorAggregate $input): void
+    public function execute(InputCollectionInterface|InputInterface $input): void
     {
         $model = $this->model;
 
