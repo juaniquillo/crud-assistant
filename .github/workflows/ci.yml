@@ -9,6 +9,10 @@ jobs:
     name: Quality Assurance (PHPStan, CS-Fixer, Tests)
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        php-version: ['8.3', '8.4']
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -16,7 +20,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: ${{ matrix.php-version }}
           tools: composer
 
       - name: Install dependencies
@@ -26,7 +30,7 @@ jobs:
         run: composer analyse
 
       - name: Check Code Style (PHP-CS-Fixer)
-        run: composer run format
+        run: composer run format:check
 
       - name: Run Tests (PHPUnit)
         run: composer test

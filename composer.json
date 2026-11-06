@@ -16,12 +16,12 @@
         }
     ],
     "require": {
-        "php": "^8.2"
+        "php": "^8.3"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.68",
         "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^12"
     },
     "autoload": {
         "psr-4": {
@@ -38,6 +38,7 @@
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
         "analyse": "vendor/bin/phpstan analyse",
         "format": "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php src tests",
+        "format:check": "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --dry-run --diff src tests",
         "phpstan": "vendor/bin/phpstan --memory-limit=1G",
         "qa": [
             "@composer run analyse",
