@@ -13,6 +13,10 @@ interface InputInterface
 
     public function setLabel(string $label): static;
 
+    /**
+     * Shared concerns only (e.g. rendering): attributes are visible to
+     * every action. Per-action config belongs in that action's Recipe.
+     */
     public function setAttribute(string $name, int|string $value): static;
 
     public function setSubElements(InputCollectionInterface $subElements): static;
@@ -35,7 +39,12 @@ interface InputInterface
 
     public function getAttribute(string $name): mixed;
 
-    /** @return array<string, int|string> */
+    /**
+     * Shared concerns only (e.g. rendering): attributes are visible to
+     * every action. Per-action config belongs in that action's Recipe.
+     *
+     * @return array<string, int|string>
+     */
     public function getAttributes(): array;
 
     public function unsetAttribute(string $key): static;
