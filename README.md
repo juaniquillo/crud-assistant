@@ -1,5 +1,7 @@
 # Crud Assistant
 
+[![CI](https://github.com/juaniquillo/crud-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/juaniquillo/crud-assistant/actions/workflows/ci.yml)
+
 Utilities for CRUD management and component re-use. One goal:
 **organization** — consolidate business logic in `Inputs` and
 implementation code in `Actions`, so form changes land in one place.
